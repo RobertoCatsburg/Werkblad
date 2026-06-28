@@ -61,6 +61,13 @@ h1 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; color: #38bdf8; 
 <div class="countdown">
 <div class="days" id="countdown-days">70</div>
 <div class="label">dagen resterend</div>
+<div id="motivatie-quote" style="margin-top:12px;font-style:italic;color:#94a3b8;font-size:0.85rem;"></div>
+</div>
+
+<div class="card" style="text-align:center;">
+<h2>Streak</h2>
+<div style="font-size:2.5rem;font-weight:700;color:#f59e0b;" id="streak-count">0</div>
+<div style="color:#94a3b8;font-size:0.85rem;">dagen op rij alle gewoonten afgevinkt</div>
 </div>
 
 <div class="phase-indicator">
@@ -352,7 +359,51 @@ function renderPhotos() {
   });
 }
 
+const QUOTES = [
+  'Discipline is de brug tussen doelen en resultaten.',
+  'Je lichaam bereikt wat je geest gelooft.',
+  'Elke rep telt. Elke maaltijd telt. Elke dag telt.',
+  'Het verschil tussen willen en hebben is doen.',
+  'Pijn is tijdelijk, trots is voor altijd.',
+  'Consistentie verslaat talent, elke keer.',
+  'Je hoeft niet perfect te zijn, je moet gewoon niet stoppen.',
+  'De beste training is degene die je daadwerkelijk doet.',
+  'Succes is de som van kleine inspanningen, dag na dag herhaald.',
+  'Over 10 weken zul je blij zijn dat je vandaag begon.',
+  'Excuses verbranden geen calorieen.',
+  'Zweet is vet dat huilt.',
+  'Focus op voortgang, niet op perfectie.',
+  'Je bent een training verwijderd van een goed humeur.',
+  'De enige slechte training is de training die je niet doet.'
+];
+
+function showQuote() {
+  const day = Math.floor((new Date() - START) / (1000*60*60*24));
+  const q = QUOTES[day % QUOTES.length];
+  document.getElementById('motivatie-quote').textContent = '"' + q + '"';
+}
+
+function updateStreak() {
+  let streak = 0;
+  for (let w = 10; w >= 1; w--) {
+    for (let d = 6; d >= 0; d--) {
+      let allChecked = true;
+      for (let i = 0; i < ITEMS.length; i++) {
+        if (!data[getKey(w, d, i)]) { allChecked = false; break; }
+      }
+      if (allChecked) streak++;
+      else if (streak > 0 || (w < 10 || d < 6)) {
+        document.getElementById('streak-count').textContent = streak;
+        return;
+      }
+    }
+  }
+  document.getElementById('streak-count').textContent = streak;
+}
+
 init();
+showQuote();
+updateStreak();
 drawChart();
 renderPhotos();
 </script>
