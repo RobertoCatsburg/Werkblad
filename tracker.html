@@ -109,6 +109,25 @@ h1 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; color: #38bdf8; 
 
 <button class="btn-save" onclick="saveWeek()">Opslaan</button>
 
+<div class="card">
+<h2>Voortgangsgrafiek</h2>
+<canvas id="chart" height="200"></canvas>
+</div>
+
+<div class="card">
+<h2>Foto's</h2>
+<p style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px;">Upload voor/na foto's per week. Opgeslagen in je browser.</p>
+<div style="display:flex;gap:12px;margin-bottom:12px;">
+<div style="flex:1;">
+<label class="btn-save" style="display:block;text-align:center;cursor:pointer;background:#334155;font-size:0.85rem;padding:10px;">
+Foto uploaden
+<input type="file" accept="image/*" onchange="uploadPhoto(event)" style="display:none;">
+</label>
+</div>
+</div>
+<div id="photo-gallery" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;"></div>
+</div>
+
 <div class="card history">
 <h2>Geschiedenis</h2>
 <div id="history-list"></div>
@@ -239,7 +258,103 @@ function renderHistory() {
   if (!el.children.length) el.innerHTML = '<p style="color:#64748b;font-size:0.85rem;padding:8px 0;">Nog geen metingen opgeslagen.</p>';
 }
 
+function drawChart() {
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.parentElement.clientWidth - 40;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const weights = [], waists = [], weeks = [];
+  for (let i = 1; i <= 10; i++) {
+    const m = data[`w${i}_measures`];
+    if (m && (m.weight || m.waist)) {
+      weeks.push(i);
+      weights.push(parseFloat(m.weight) || null);
+      waists.push(parseFloat(m.waist) || null);
+    }
+  }
+  if (weeks.length < 2) {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Grafiek verschijnt na 2+ weken metingen', canvas.width/2, canvas.height/2);
+    return;
+  }
+
+  const pad = {top:20, right:20, bottom:30, left:45};
+  const w = canvas.width - pad.left - pad.right;
+  const h = canvas.height - pad.top - pad.bottom;
+
+  function drawLine(values, color) {
+    const valid = values.filter(v => v !== null);
+    if (valid.length < 2) return;
+    const min = Math.min(...valid) * 0.98;
+    const max = Math.max(...valid) * 1.02;
+    const range = max - min || 1;
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    let started = false;
+    values.forEach((v, i) => {
+      if (v === null) return;
+      const x = pad.left + (i / (values.length - 1)) * w;
+      const y = pad.top + h - ((v - min) / range) * h;
+      if (!started) { ctx.moveTo(x, y); started = true; }
+      else ctx.lineTo(x, y);
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center';
+  weeks.forEach((wk, i) => {
+    const x = pad.left + (i / (weeks.length - 1)) * w;
+    ctx.fillText('W' + wk, x, canvas.height - 8);
+  });
+
+  drawLine(weights, '#38bdf8');
+  drawLine(waists, '#f472b6');
+
+  ctx.fillStyle = '#38bdf8'; ctx.fillRect(pad.left, 4, 10, 10);
+  ctx.fillStyle = '#e2e8f0'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('Gewicht', pad.left + 14, 13);
+  ctx.fillStyle = '#f472b6'; ctx.fillRect(pad.left + 80, 4, 10, 10);
+  ctx.fillText('Buikomvang', pad.left + 94, 13);
+}
+
+function uploadPhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const photos = JSON.parse(localStorage.getItem('absplan_photos') || '[]');
+    photos.push({ week: currentWeek, date: new Date().toLocaleDateString('nl-NL'), src: e.target.result });
+    localStorage.setItem('absplan_photos', JSON.stringify(photos));
+    renderPhotos();
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderPhotos() {
+  const el = document.getElementById('photo-gallery');
+  const photos = JSON.parse(localStorage.getItem('absplan_photos') || '[]');
+  el.innerHTML = '';
+  photos.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.style.cssText = 'position:relative;border-radius:8px;overflow:hidden;background:#0f172a;';
+    div.innerHTML = `<img src="${p.src}" style="width:100%;display:block;border-radius:8px;"><div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:4px 8px;font-size:0.75rem;">W${p.week} - ${p.date}</div>`;
+    el.appendChild(div);
+  });
+}
+
 init();
+drawChart();
+renderPhotos();
 </script>
 </body>
 </html>
