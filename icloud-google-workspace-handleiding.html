@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handleiding: Persoonlijk Dagelijks Plan in iCloud & Google Workspace</title>
+    <style>
+        :root {
+            --apple-blue: #007AFF;
+            --apple-gray: #8E8E93;
+            --apple-light: #F2F2F7;
+            --google-blue: #4285F4;
+            --google-red: #EA4335;
+            --google-yellow: #FBBC05;
+            --google-green: #34A853;
+            --pillar-routine: #5856D6;
+            --pillar-health: #34C759;
+            --pillar-finance: #FF9500;
+            --pillar-mindfulness: #AF52DE;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #F5F5F7;
+            color: #1D1D1F;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Overview Grid */
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .overview-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .overview-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .overview-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+        .overview-card h3 {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        .overview-card p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Platform Toggle */
+        .platform-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .badge-apple {
+            background: #1D1D1F;
+            color: white;
+        }
+        .badge-google {
+            background: white;
+            color: #1D1D1F;
+            border: 2px solid #E0E0E0;
+        }
+
+        /* Section */
+        .section {
+            margin: 50px 0;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid;
+        }
+        .section-header .section-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            color: white;
+            flex-shrink: 0;
+        }
+        .section-header h2 {
+            font-size: 1.6em;
+        }
+        .section-header .section-sub {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .pillar-routine .section-header { border-color: var(--pillar-routine); }
+        .pillar-routine .section-icon { background: var(--pillar-routine); }
+        .pillar-health .section-header { border-color: var(--pillar-health); }
+        .pillar-health .section-icon { background: var(--pillar-health); }
+        .pillar-finance .section-header { border-color: var(--pillar-finance); }
+        .pillar-finance .section-icon { background: var(--pillar-finance); }
+        .pillar-mindfulness .section-header { border-color: var(--pillar-mindfulness); }
+        .pillar-mindfulness .section-icon { background: var(--pillar-mindfulness); }
+
+        /* Platform Split */
+        .platform-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .platform-split { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8em; }
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .platform-card-header {
+            padding: 16px 20px;
+            font-weight: 700;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .platform-card-header.apple {
+            background: linear-gradient(135deg, #1D1D1F, #3A3A3C);
+            color: white;
+        }
+        .platform-card-header.google {
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            color: white;
+        }
+        .platform-card-body {
+            padding: 20px;
+        }
+
+        /* Steps */
+        .step {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        .step:last-child { margin-bottom: 0; }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85em;
+            flex-shrink: 0;
+            color: white;
+        }
+        .apple .step-number, .platform-card-header.apple ~ .platform-card-body .step-number {
+            background: var(--apple-blue);
+        }
+        .platform-card:first-child .step-number {
+            background: var(--apple-blue);
+        }
+        .platform-card:last-child .step-number {
+            background: var(--google-blue);
+        }
+        .step-content h4 {
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+        .step-content p {
+            font-size: 0.88em;
+            color: #555;
+        }
+
+        /* Visual Mock */
+        .app-mock {
+            background: var(--apple-light);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin: 16px 0;
+            border: 1px solid #E5E5EA;
+        }
+        .app-mock-title {
+            font-weight: 700;
+            font-size: 0.85em;
+            color: var(--apple-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .mock-item {
+            background: white;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.88em;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .mock-item:last-child { margin-bottom: 0; }
+        .mock-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #C7C7CC;
+            flex-shrink: 0;
+        }
+        .mock-checkbox.checked {
+            background: var(--apple-blue);
+            border-color: var(--apple-blue);
+            position: relative;
+        }
+        .mock-checkbox.checked::after {
+            content: '\2713';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+        .mock-tag {
+            font-size: 0.7em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .tag-urgent { background: #FFE5E5; color: #D00; }
+        .tag-important { background: #FFF3E0; color: #E65100; }
+        .tag-normal { background: #E8F5E9; color: #2E7D32; }
+
+        /* Calendar Mock */
+        .cal-mock {
+            background: white;
+            border-radius: var(--radius-sm);
+            border: 1px solid #E5E5EA;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+        .cal-header {
+            background: var(--apple-light);
+            padding: 8px 14px;
+            font-weight: 600;
+            font-size: 0.85em;
+            border-bottom: 1px solid #E5E5EA;
+        }
+        .cal-body {
+            padding: 8px;
+        }
+        .cal-event {
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            font-size: 0.82em;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+        }
+        .cal-event:last-child { margin-bottom: 0; }
+        .cal-event.morning { background: #E3F2FD; color: #1565C0; border-left: 3px solid #1565C0; }
+        .cal-event.work { background: #FFF3E0; color: #E65100; border-left: 3px solid #E65100; }
+        .cal-event.health { background: #E8F5E9; color: #2E7D32; border-left: 3px solid #2E7D32; }
+        .cal-event.evening { background: #F3E5F5; color: #7B1FA2; border-left: 3px solid #7B1FA2; }
+        .cal-event.travel { background: #ECEFF1; color: #546E7A; border-left: 3px solid #546E7A; }
+
+        /* Spreadsheet Mock */
+        .sheet-mock {
+            border-radius: var(--radius-sm);
+            border: 1px solid #E5E5EA;
+            overflow: hidden;
+            margin: 16px 0;
+            font-size: 0.82em;
+        }
+        .sheet-mock table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .sheet-mock th {
+            background: #F1F3F4;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #DADCE0;
+            font-size: 0.9em;
+        }
+        .sheet-mock td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #ECECEC;
+        }
+        .sheet-mock tr:last-child td { border-bottom: none; }
+        .sheet-mock .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .progress-bar {
+            height: 6px;
+            background: #E0E0E0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .fill-green { background: var(--google-green); }
+        .fill-orange { background: var(--google-yellow); }
+        .fill-blue { background: var(--google-blue); }
+
+        /* Tip Box */
+        .tip-box {
+            background: linear-gradient(135deg, #EEF2FF, #E0E7FF);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--pillar-routine);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .tip-box.health { border-left-color: var(--pillar-health); background: linear-gradient(135deg, #ECFDF5, #D1FAE5); }
+        .tip-box.finance { border-left-color: var(--pillar-finance); background: linear-gradient(135deg, #FFFBEB, #FEF3C7); }
+        .tip-box.mindful { border-left-color: var(--pillar-mindfulness); background: linear-gradient(135deg, #FAF5FF, #EDE9FE); }
+        .tip-icon { font-size: 1.3em; flex-shrink: 0; }
+        .tip-text { font-size: 0.88em; }
+        .tip-text strong { display: block; margin-bottom: 2px; }
+
+        /* Notes Mock */
+        .notes-mock {
+            background: #FFFDE7;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border: 1px solid #FFF9C4;
+            font-family: 'Georgia', serif;
+            font-size: 0.88em;
+            line-height: 1.8;
+            position: relative;
+        }
+        .notes-mock::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #FFCDD2;
+        }
+        .notes-mock .notes-title {
+            font-weight: 700;
+            font-family: -apple-system, sans-serif;
+            font-size: 1em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .notes-line {
+            padding-left: 40px;
+            border-bottom: 1px solid #E8E8D0;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+
+        /* Google Keep Mock */
+        .keep-mock {
+            background: #FFF8E1;
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border: 1px solid #FFE082;
+            font-size: 0.88em;
+        }
+        .keep-mock .keep-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .keep-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+        }
+        .keep-box {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #9E9E9E;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Summary Table */
+        .summary-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+            font-size: 0.9em;
+        }
+        .summary-table thead th {
+            background: #1D1D1F;
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .summary-table tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #F0F0F0;
+            background: white;
+        }
+        .summary-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .summary-table .tool-name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Quick Start Checklist */
+        .quickstart {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            padding: 30px;
+            margin: 40px 0;
+        }
+        .quickstart h2 {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .qs-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 14px;
+            background: var(--apple-light);
+            border-radius: var(--radius-sm);
+        }
+        .qs-item .qs-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+        .qs-item h4 { font-size: 0.9em; margin-bottom: 2px; }
+        .qs-item p { font-size: 0.82em; color: #666; }
+
+        /* Navigation dots */
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 30px 0;
+        }
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Weekly Template */
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            margin: 16px 0;
+            font-size: 0.78em;
+        }
+        .week-day {
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #E5E5EA;
+        }
+        .week-day .day-name {
+            font-weight: 700;
+            font-size: 0.9em;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .week-day .day-item {
+            padding: 3px 4px;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            font-size: 0.85em;
+        }
+        .day-item.strength { background: #DBEAFE; color: #1E40AF; }
+        .day-item.cardio { background: #FEE2E2; color: #991B1B; }
+        .day-item.rest { background: #F3F4F6; color: #6B7280; }
+        .day-item.meal { background: #D1FAE5; color: #065F46; }
+
+        @media (max-width: 600px) {
+            .week-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        /* Print */
+        @media print {
+            .hero { background: #667eea !important; -webkit-print-color-adjust: exact; }
+            .platform-split { grid-template-columns: 1fr 1fr; }
+            body { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Persoonlijk Dagelijks Plan</h1>
+    <p>Stap-voor-stap handleiding om jouw plan te verwezenlijken met Apple iCloud & Google Workspace</p>
+    <div class="platform-nav">
+        <span class="platform-badge badge-apple">&#63743; Apple iCloud</span>
+        <span class="platform-badge badge-google">G Google Workspace</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- OVERVIEW -->
+    <div class="overview">
+        <div class="overview-card">
+            <div class="icon">&#128197;</div>
+            <h3>Dagplanning & Taken</h3>
+            <p>Agenda, herinneringen en Eisenhower-methode</p>
+        </div>
+        <div class="overview-card">
+            <div class="icon">&#128170;</div>
+            <h3>Gezondheid & Fitness</h3>
+            <p>Training, voeding en progressie bijhouden</p>
+        </div>
+        <div class="overview-card">
+            <div class="icon">&#128176;</div>
+            <h3>Financien & Vermogen</h3>
+            <p>Budget, noodfonds en beleggingen tracken</p>
+        </div>
+        <div class="overview-card">
+            <div class="icon">&#128221;</div>
+            <h3>Reflectie & Mindfulness</h3>
+            <p>Dagboek, dankbaarheid en avondroutine</p>
+        </div>
+    </div>
+
+    <!-- TOOLS OVERZICHT -->
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th>Onderdeel</th>
+                <th>&#63743; Apple iCloud</th>
+                <th>G Google Workspace</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Dagplanning</strong></td>
+                <td class="tool-name">&#128197; Apple Agenda + Herinneringen</td>
+                <td class="tool-name">&#128197; Google Agenda + Tasks</td>
+            </tr>
+            <tr>
+                <td><strong>Taakbeheer (Eisenhower)</strong></td>
+                <td class="tool-name">&#9745; Herinneringen (lijsten)</td>
+                <td class="tool-name">&#9745; Google Tasks / Keep</td>
+            </tr>
+            <tr>
+                <td><strong>Fitness & Voeding</strong></td>
+                <td class="tool-name">&#128223; Apple Gezondheid + Numbers</td>
+                <td class="tool-name">&#128202; Google Sheets</td>
+            </tr>
+            <tr>
+                <td><strong>Financien</strong></td>
+                <td class="tool-name">&#128202; Numbers spreadsheet</td>
+                <td class="tool-name">&#128202; Google Sheets</td>
+            </tr>
+            <tr>
+                <td><strong>Reflectie & Journal</strong></td>
+                <td class="tool-name">&#128221; Apple Notities / Dagboek</td>
+                <td class="tool-name">&#128221; Google Docs / Keep</td>
+            </tr>
+            <tr>
+                <td><strong>Documenten opslaan</strong></td>
+                <td class="tool-name">&#9729; iCloud Drive</td>
+                <td class="tool-name">&#9729; Google Drive</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PIJLER 1: DAGPLANNING & TAAKBEHEER         -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="section pillar-routine">
+        <div class="section-header">
+            <div class="section-icon">&#128197;</div>
+            <div>
+                <h2>Pijler 1: Dagplanning & Taakbeheer</h2>
+                <div class="section-sub">Dagelijks routine, agenda, Eisenhower-methode en reistijd</div>
+            </div>
+        </div>
+
+        <div class="platform-split">
+            <!-- APPLE -->
+            <div class="platform-card">
+                <div class="platform-card-header apple">&#63743; Apple iCloud aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Apple Agenda: Maak kleur-agenda's aan</h4>
+                            <p>Open <strong>Agenda</strong> &rarr; Tik onderin op <strong>Agenda's</strong> &rarr; <strong>Voeg agenda toe</strong>. Maak 4 agenda's:</p>
+                            <ul style="font-size:0.88em;color:#555;margin-top:4px;padding-left:16px;">
+                                <li><span style="color:#1565C0">&#9632;</span> <strong>Ochtend & Routine</strong> (blauw)</li>
+                                <li><span style="color:#E65100">&#9632;</span> <strong>Werk</strong> (oranje)</li>
+                                <li><span style="color:#2E7D32">&#9632;</span> <strong>Gezondheid</strong> (groen)</li>
+                                <li><span style="color:#7B1FA2">&#9632;</span> <strong>Avond & Reflectie</strong> (paars)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cal-mock">
+                        <div class="cal-header">Maandag - Voorbeelddag</div>
+                        <div class="cal-body">
+                            <div class="cal-event morning">&#9728; 06:30 Ochtendritueel (rekken, ontbijt) <span>30 min</span></div>
+                            <div class="cal-event travel">&#128663; 07:45 Vertrek naar kantoor <span>25 min</span></div>
+                            <div class="cal-event work">&#128188; 09:00 - 12:00 Werkblok 1 <span>3 uur</span></div>
+                            <div class="cal-event work">&#127860; 12:00 Lunchpauze <span>30 min</span></div>
+                            <div class="cal-event work">&#128188; 12:30 - 18:00 Werkblok 2 <span>5,5 uur</span></div>
+                            <div class="cal-event health">&#128170; 18:30 Training <span>1 uur</span></div>
+                            <div class="cal-event evening">&#128221; 21:30 Avondreflectie <span>10 min</span></div>
+                            <div class="cal-event evening">&#128564; 22:30 Bedtijd <span>vast</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Herinneringen: Eisenhower-methode</h4>
+                            <p>Open <strong>Herinneringen</strong> &rarr; Maak 4 lijsten aan voor de Eisenhower-matrix:</p>
+                        </div>
+                    </div>
+
+                    <div class="app-mock">
+                        <div class="app-mock-title">Herinneringen - Eisenhower Lijsten</div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox"></div>
+                            <span><strong style="color:#D00">&#9888; Urgent + Belangrijk</strong> - Direct doen</span>
+                        </div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox"></div>
+                            <span><strong style="color:#E65100">&#11088; Belangrijk</strong> - Inplannen</span>
+                        </div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox"></div>
+                            <span><strong style="color:#1565C0">&#128228; Urgent</strong> - Delegeren</span>
+                        </div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox"></div>
+                            <span><strong style="color:#888">&#128465; Niet urgent/belangrijk</strong> - Elimineren</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Dagelijks Top 3 instellen</h4>
+                            <p>Maak in Herinneringen een lijst <strong>"Top 3 Vandaag"</strong>. Stel elke avond/ochtend je 3 prioriteiten in en markeer voltooide taken.</p>
+                        </div>
+                    </div>
+
+                    <div class="app-mock">
+                        <div class="app-mock-title">Top 3 Vandaag</div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox checked"></div>
+                            <span>Projectvoorstel Q3 afmaken</span>
+                            <span class="mock-tag tag-urgent">Urgent</span>
+                        </div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox"></div>
+                            <span>Sportschoolsessie: upper body</span>
+                            <span class="mock-tag tag-important">Belangrijk</span>
+                        </div>
+                        <div class="mock-item">
+                            <div class="mock-checkbox"></div>
+                            <span>Budget mei nakijken</span>
+                            <span class="mock-tag tag-normal">Normaal</span>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Automatische herinneringen</h4>
+                            <p>Stel terugkerende herinneringen in:<br>
+                            &bull; <strong>07:00</strong> - "Bekijk je Top 3 voor vandaag"<br>
+                            &bull; <strong>22:00</strong> - "Stel morgen's Top 3 op"<br>
+                            &bull; <strong>22:30</strong> - "Bedtijd - leg je telefoon weg"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOGLE -->
+            <div class="platform-card">
+                <div class="platform-card-header google">G Google Workspace aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Google Agenda: Kleurgecodeerde agenda's</h4>
+                            <p>Open <strong>calendar.google.com</strong> &rarr; Klik op <strong>+ Andere agenda's</strong> &rarr; <strong>Nieuwe agenda</strong>. Maak dezelfde 4 kleur-agenda's aan.</p>
+                        </div>
+                    </div>
+
+                    <div class="cal-mock">
+                        <div class="cal-header">Maandag - Google Agenda Voorbeeld</div>
+                        <div class="cal-body">
+                            <div class="cal-event morning">&#9728; 06:30 Ochtendritueel <span>30 min</span></div>
+                            <div class="cal-event travel">&#128663; 07:45 Woon-werkverkeer <span>25 min</span></div>
+                            <div class="cal-event work">&#128188; 09:00 - 12:00 Focusblok <span>3 uur</span></div>
+                            <div class="cal-event work">&#127860; 12:00 Pauze <span>30 min</span></div>
+                            <div class="cal-event work">&#128188; 12:30 - 18:00 Werkblok <span>5,5 uur</span></div>
+                            <div class="cal-event health">&#128170; 18:30 Gym sessie <span>1 uur</span></div>
+                            <div class="cal-event evening">&#128221; 21:30 Dagboek <span>10 min</span></div>
+                            <div class="cal-event evening">&#128564; 22:30 Slapen <span>vast</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Google Tasks: Takenlijsten aanmaken</h4>
+                            <p>Open Google Tasks (zijbalk in Gmail/Agenda) &rarr; Maak lijsten aan:</p>
+                            <ul style="font-size:0.88em;color:#555;margin-top:4px;padding-left:16px;">
+                                <li><strong>Top 3 Vandaag</strong> - dagelijkse prioriteiten</li>
+                                <li><strong>Urgent + Belangrijk</strong> - directe actie</li>
+                                <li><strong>Belangrijk, niet urgent</strong> - inplannen</li>
+                                <li><strong>Wekelijkse doelen</strong> - grotere taken</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Google Keep: Snelle Eisenhower-board</h4>
+                            <p>Gebruik <strong>Google Keep</strong> met labels als visueel bord:</p>
+                        </div>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0;">
+                        <div class="keep-mock" style="background:#FFCDD2;border-color:#EF9A9A;">
+                            <div class="keep-title" style="font-size:0.82em;">&#9888; Urgent + Belangrijk</div>
+                            <div class="keep-check"><div class="keep-box"></div> <span style="font-size:0.82em;">Deadline project</span></div>
+                            <div class="keep-check"><div class="keep-box"></div> <span style="font-size:0.82em;">Vergadering prep</span></div>
+                        </div>
+                        <div class="keep-mock" style="background:#C8E6C9;border-color:#A5D6A7;">
+                            <div class="keep-title" style="font-size:0.82em;">&#11088; Belangrijk</div>
+                            <div class="keep-check"><div class="keep-box"></div> <span style="font-size:0.82em;">Training plannen</span></div>
+                            <div class="keep-check"><div class="keep-box"></div> <span style="font-size:0.82em;">Budget bijwerken</span></div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Terugkerende agenda-events</h4>
+                            <p>Maak terugkerende afspraken:<br>
+                            &bull; <strong>Dagelijks 07:00</strong> - "Dagstart: Top 3 bekijken"<br>
+                            &bull; <strong>Dagelijks 22:00</strong> - "Morgen voorbereiden"<br>
+                            &bull; <strong>Zondag 20:00</strong> - "Weekplanning maken"</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-icon">&#128161;</div>
+                        <div class="tip-text">
+                            <strong>Pro tip: Focustijd</strong>
+                            Google Agenda heeft een ingebouwde <strong>Focustijd</strong>-functie. Ga naar een tijdslot &rarr; kies "Focustijd" om automatisch meldingen te dempen tijdens werkblokken.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PIJLER 2: GEZONDHEID & FITNESS             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="section pillar-health">
+        <div class="section-header">
+            <div class="section-icon">&#128170;</div>
+            <div>
+                <h2>Pijler 2: Gezondheid & Fitnesstracker</h2>
+                <div class="section-sub">Training, voeding, macro's en progressieve overbelasting bijhouden</div>
+            </div>
+        </div>
+
+        <div class="platform-split">
+            <!-- APPLE -->
+            <div class="platform-card">
+                <div class="platform-card-header apple">&#63743; Apple iCloud aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Apple Gezondheid app configureren</h4>
+                            <p>Open <strong>Gezondheid</strong> &rarr; <strong>Bladeren</strong> &rarr; stel je gegevens in:</p>
+                            <ul style="font-size:0.88em;color:#555;margin-top:4px;padding-left:16px;">
+                                <li><strong>Lichaamsmetingen</strong> - Gewicht wekelijks invoeren</li>
+                                <li><strong>Voeding</strong> - Calorieen en eiwitten bijhouden</li>
+                                <li><strong>Activiteit</strong> - Trainingen loggen</li>
+                                <li><strong>Slaap</strong> - Slaapschema instellen op 22:30-06:30</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Numbers: Trainings-spreadsheet</h4>
+                            <p>Maak een <strong>Numbers</strong>-spreadsheet in iCloud Drive met tabs voor training en voeding:</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Oefening</th>
+                                <th>Sets x Reps</th>
+                                <th>Gewicht</th>
+                                <th>Notitie</th>
+                            </tr>
+                            <tr>
+                                <td>28/06</td>
+                                <td>Bench Press</td>
+                                <td class="num">4 x 10</td>
+                                <td class="num">70 kg</td>
+                                <td style="color:green">+2,5 kg &#x2191;</td>
+                            </tr>
+                            <tr>
+                                <td>28/06</td>
+                                <td>Squats</td>
+                                <td class="num">4 x 8</td>
+                                <td class="num">90 kg</td>
+                                <td>Goed</td>
+                            </tr>
+                            <tr>
+                                <td>28/06</td>
+                                <td>Rows</td>
+                                <td class="num">3 x 12</td>
+                                <td class="num">55 kg</td>
+                                <td style="color:green">+5 kg &#x2191;</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Slaapschema instellen</h4>
+                            <p><strong>Gezondheid</strong> &rarr; <strong>Slaap</strong> &rarr; <strong>Volledig schema</strong>:<br>
+                            &bull; Bedtijd: <strong>22:30</strong><br>
+                            &bull; Wekker: <strong>06:30</strong> (= 8 uur slaap)<br>
+                            &bull; Zet <strong>Slaapfocus</strong> aan om meldingen te blokkeren</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Agenda: Trainingsschema inplannen</h4>
+                            <p>Maak terugkerende events in de groene "Gezondheid"-agenda:</p>
+                        </div>
+                    </div>
+
+                    <div class="week-grid">
+                        <div class="week-day">
+                            <div class="day-name">Ma</div>
+                            <div class="day-item strength">Kracht: Upper</div>
+                            <div class="day-item meal">Eiwit: kip</div>
+                        </div>
+                        <div class="week-day">
+                            <div class="day-name">Di</div>
+                            <div class="day-item cardio">Cardio/HIIT</div>
+                            <div class="day-item meal">Eiwit: eieren</div>
+                        </div>
+                        <div class="week-day">
+                            <div class="day-name">Wo</div>
+                            <div class="day-item rest">Rustdag</div>
+                            <div class="day-item meal">Eiwit: kwark</div>
+                        </div>
+                        <div class="week-day">
+                            <div class="day-name">Do</div>
+                            <div class="day-item strength">Kracht: Lower</div>
+                            <div class="day-item meal">Eiwit: rundvlees</div>
+                        </div>
+                        <div class="week-day">
+                            <div class="day-name">Vr</div>
+                            <div class="day-item cardio">Cardio: fietsen</div>
+                            <div class="day-item meal">Eiwit: peulvr.</div>
+                        </div>
+                        <div class="week-day">
+                            <div class="day-name">Za</div>
+                            <div class="day-item strength">Kracht: Full</div>
+                            <div class="day-item meal">Eiwit: kip</div>
+                        </div>
+                        <div class="week-day">
+                            <div class="day-name">Zo</div>
+                            <div class="day-item rest">Rustdag</div>
+                            <div class="day-item meal">Vrij</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOGLE -->
+            <div class="platform-card">
+                <div class="platform-card-header google">G Google Workspace aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Google Sheets: Fitness Dashboard</h4>
+                            <p>Maak in <strong>Google Drive</strong> een spreadsheet <strong>"Fitness Tracker"</strong> met de volgende tabbladen:</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Gewicht (kg)</th>
+                                <th>Kcal</th>
+                                <th>Eiwit (g)</th>
+                                <th>Training</th>
+                            </tr>
+                            <tr>
+                                <td>28/06</td>
+                                <td class="num">78,5</td>
+                                <td class="num">2.100</td>
+                                <td class="num">135</td>
+                                <td>Upper Body</td>
+                            </tr>
+                            <tr>
+                                <td>27/06</td>
+                                <td class="num">78,7</td>
+                                <td class="num">2.050</td>
+                                <td class="num">128</td>
+                                <td>Cardio 30 min</td>
+                            </tr>
+                            <tr>
+                                <td>26/06</td>
+                                <td class="num">78,6</td>
+                                <td class="num">1.950</td>
+                                <td class="num">140</td>
+                                <td>Rustdag</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Tabblad 2: Progressieve Overbelasting</h4>
+                            <p>Track je gewichten per oefening om progressie te zien:</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Oefening</th>
+                                <th>Week 1</th>
+                                <th>Week 2</th>
+                                <th>Week 3</th>
+                                <th>Progressie</th>
+                            </tr>
+                            <tr>
+                                <td>Bench Press</td>
+                                <td class="num">60 kg</td>
+                                <td class="num">65 kg</td>
+                                <td class="num">70 kg</td>
+                                <td>
+                                    <div class="progress-bar"><div class="progress-fill fill-green" style="width:70%"></div></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Squat</td>
+                                <td class="num">80 kg</td>
+                                <td class="num">85 kg</td>
+                                <td class="num">90 kg</td>
+                                <td>
+                                    <div class="progress-bar"><div class="progress-fill fill-green" style="width:90%"></div></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Deadlift</td>
+                                <td class="num">100 kg</td>
+                                <td class="num">105 kg</td>
+                                <td class="num">107,5 kg</td>
+                                <td>
+                                    <div class="progress-bar"><div class="progress-fill fill-orange" style="width:55%"></div></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Tabblad 3: Maaltijdplan</h4>
+                            <p>Plan je eiwitrijke maaltijden per dag (doel: 90-150g eiwit/dag):</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Maaltijd</th>
+                                <th>Wat</th>
+                                <th>Eiwit</th>
+                                <th>Kcal</th>
+                            </tr>
+                            <tr>
+                                <td>Ontbijt</td>
+                                <td>3 eieren + havermout</td>
+                                <td class="num">25g</td>
+                                <td class="num">450</td>
+                            </tr>
+                            <tr>
+                                <td>Lunch</td>
+                                <td>Kipfilet + rijst + groenten</td>
+                                <td class="num">40g</td>
+                                <td class="num">550</td>
+                            </tr>
+                            <tr>
+                                <td>Snack</td>
+                                <td>Kwark 500g</td>
+                                <td class="num">35g</td>
+                                <td class="num">280</td>
+                            </tr>
+                            <tr>
+                                <td>Avondeten</td>
+                                <td>Mager rundvlees + aardappelen</td>
+                                <td class="num">35g</td>
+                                <td class="num">600</td>
+                            </tr>
+                            <tr style="font-weight:700;background:#F5F5F5;">
+                                <td>Totaal</td>
+                                <td></td>
+                                <td class="num">135g &#9989;</td>
+                                <td class="num">1.880</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Google Agenda: Trainingsblokken</h4>
+                            <p>Plan dezelfde wekelijkse trainingen als terugkerende events in een aparte "Fitness" agenda (groene kleur).</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box health">
+                        <div class="tip-icon">&#128161;</div>
+                        <div class="tip-text">
+                            <strong>Pro tip: Formules in Google Sheets</strong>
+                            Gebruik <code>=GEMIDDELDE()</code> voor weekgemiddelden en <code>=SPARKLINE()</code> voor mini-grafieken van je gewichtstrend direct in de cel.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PIJLER 3: FINANCIEN & VERMOGEN             -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="section pillar-finance">
+        <div class="section-header">
+            <div class="section-icon">&#128176;</div>
+            <div>
+                <h2>Pijler 3: Vermogensbeheer & Financien</h2>
+                <div class="section-sub">Noodfonds, budget, beleggingen en schulden bijhouden</div>
+            </div>
+        </div>
+
+        <div class="platform-split">
+            <!-- APPLE -->
+            <div class="platform-card">
+                <div class="platform-card-header apple">&#63743; Apple iCloud aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Numbers: Financieel Dashboard</h4>
+                            <p>Maak een <strong>Numbers</strong>-spreadsheet <strong>"Mijn Financien"</strong> in iCloud Drive met 3 tabbladen:</p>
+                        </div>
+                    </div>
+
+                    <div class="app-mock">
+                        <div class="app-mock-title">Tabblad 1: Maandelijks Budget</div>
+                        <div class="mock-item" style="justify-content:space-between;">
+                            <span>&#128181; Netto salaris</span>
+                            <strong style="color:#2E7D32">+ &#8364; 2.800</strong>
+                        </div>
+                        <div class="mock-item" style="justify-content:space-between;">
+                            <span>&#127968; Huur / Hypotheek</span>
+                            <strong style="color:#D00">- &#8364; 850</strong>
+                        </div>
+                        <div class="mock-item" style="justify-content:space-between;">
+                            <span>&#128663; Auto (lening + verzekering)</span>
+                            <strong style="color:#D00">- &#8364; 450</strong>
+                        </div>
+                        <div class="mock-item" style="justify-content:space-between;">
+                            <span>&#127828; Boodschappen</span>
+                            <strong style="color:#D00">- &#8364; 350</strong>
+                        </div>
+                        <div class="mock-item" style="justify-content:space-between;">
+                            <span>&#128178; Sparen (20%)</span>
+                            <strong style="color:#1565C0">- &#8364; 560</strong>
+                        </div>
+                        <div class="mock-item" style="justify-content:space-between;background:#F0FFF0;">
+                            <span><strong>Vrij besteedbaar</strong></span>
+                            <strong style="color:#2E7D32">&#8364; 590</strong>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Tabblad 2: Noodfonds Tracker</h4>
+                            <p>Stel je doel in (6x vaste lasten) en track maandelijks:</p>
+                        </div>
+                    </div>
+
+                    <div class="app-mock">
+                        <div class="app-mock-title">Noodfonds voortgang</div>
+                        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                            <span style="font-size:0.9em;">Doel: <strong>&#8364; 10.200</strong> (6 maanden)</span>
+                            <span style="font-size:0.9em;">Huidig: <strong style="color:#2E7D32">&#8364; 3.400</strong></span>
+                        </div>
+                        <div class="progress-bar" style="height:12px;">
+                            <div class="progress-fill fill-green" style="width:33%"></div>
+                        </div>
+                        <div style="text-align:center;font-size:0.85em;margin-top:6px;color:#666;">33% bereikt - nog ~12 maanden bij &#8364;560/maand</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Tabblad 3: Beleggingsoverzicht</h4>
+                            <p>Track je portefeuille (na buffer opgebouwd):</p>
+                            <ul style="font-size:0.88em;color:#555;margin-top:4px;padding-left:16px;">
+                                <li>MSCI World ETF - maandelijkse inleg</li>
+                                <li>Rendement vs. benchmark</li>
+                                <li>Rebalancing-momenten</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Herinneringen: Financiele checkpoints</h4>
+                            <p>Stel terugkerende herinneringen in:<br>
+                            &bull; <strong>1e van de maand</strong> - "Salaris: zet 20% opzij"<br>
+                            &bull; <strong>Laatste zondag</strong> - "Budget evaluatie"<br>
+                            &bull; <strong>Elk kwartaal</strong> - "Portefeuille rebalancen"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOGLE -->
+            <div class="platform-card">
+                <div class="platform-card-header google">G Google Workspace aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Google Sheets: Huishoudboekje</h4>
+                            <p>Maak een uitgebreide spreadsheet <strong>"Financieel Overzicht 2026"</strong>:</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Categorie</th>
+                                <th>Budget</th>
+                                <th>Werkelijk</th>
+                                <th>Verschil</th>
+                            </tr>
+                            <tr>
+                                <td>&#127968; Wonen</td>
+                                <td class="num">&#8364; 850</td>
+                                <td class="num">&#8364; 850</td>
+                                <td class="num" style="color:green">&#8364; 0</td>
+                            </tr>
+                            <tr>
+                                <td>&#128663; Vervoer</td>
+                                <td class="num">&#8364; 450</td>
+                                <td class="num">&#8364; 430</td>
+                                <td class="num" style="color:green">+ &#8364; 20</td>
+                            </tr>
+                            <tr>
+                                <td>&#127828; Voeding</td>
+                                <td class="num">&#8364; 350</td>
+                                <td class="num">&#8364; 380</td>
+                                <td class="num" style="color:red">- &#8364; 30</td>
+                            </tr>
+                            <tr>
+                                <td>&#128178; Sparen</td>
+                                <td class="num">&#8364; 560</td>
+                                <td class="num">&#8364; 560</td>
+                                <td class="num" style="color:green">&#8364; 0</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Tabblad: Noodfonds & Schuldafbouw</h4>
+                            <p>Maak een visuele tracker met formules:</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Maand</th>
+                                <th>Gespaard</th>
+                                <th>Totaal Fonds</th>
+                                <th>Autoschuld</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>Jan 2026</td>
+                                <td class="num">&#8364; 560</td>
+                                <td class="num">&#8364; 2.280</td>
+                                <td class="num">&#8364; 18.500</td>
+                                <td>
+                                    <div class="progress-bar"><div class="progress-fill fill-orange" style="width:22%"></div></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jun 2026</td>
+                                <td class="num">&#8364; 560</td>
+                                <td class="num">&#8364; 5.640</td>
+                                <td class="num">&#8364; 16.200</td>
+                                <td>
+                                    <div class="progress-bar"><div class="progress-fill fill-green" style="width:55%"></div></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dec 2026</td>
+                                <td class="num">&#8364; 560</td>
+                                <td class="num" style="color:green;font-weight:700;">&#8364; 10.200</td>
+                                <td class="num">&#8364; 13.900</td>
+                                <td>
+                                    <div class="progress-bar"><div class="progress-fill fill-green" style="width:100%"></div></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Google Sheets: Grafieken toevoegen</h4>
+                            <p>Selecteer je data &rarr; <strong>Invoegen</strong> &rarr; <strong>Grafiek</strong>:<br>
+                            &bull; Lijndiagram voor noodfondsgroei<br>
+                            &bull; Cirkeldiagram voor uitgavenverdeling<br>
+                            &bull; Staafdiagram voor budget vs. werkelijk</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Google Agenda: Financiele reminders</h4>
+                            <p>Plan terugkerende afspraken in een aparte "Financien" agenda (oranje kleur).</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box finance">
+                        <div class="tip-icon">&#128161;</div>
+                        <div class="tip-text">
+                            <strong>Pro tip: Google Sheets formules</strong>
+                            <code>=GOOGLEFINANCE("IWDA.AS")</code> haalt live ETF-koersen op. Gebruik <code>=SOM()</code> en <code>=ALS()</code> voor automatische budget-alerts wanneer je over je limiet gaat.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- PIJLER 4: REFLECTIE & MINDFULNESS          -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="section pillar-mindfulness">
+        <div class="section-header">
+            <div class="section-icon">&#128221;</div>
+            <div>
+                <h2>Pijler 4: Dagelijkse Reflectie & Mindfulness</h2>
+                <div class="section-sub">Avondjournal, dankbaarheid en ademhalingsoefeningen</div>
+            </div>
+        </div>
+
+        <div class="platform-split">
+            <!-- APPLE -->
+            <div class="platform-card">
+                <div class="platform-card-header apple">&#63743; Apple iCloud aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Apple Dagboek app (Journal)</h4>
+                            <p>Gebruik de ingebouwde <strong>Dagboek</strong>-app (iOS 17+). Open de app en maak elke avond een nieuwe invoer:</p>
+                        </div>
+                    </div>
+
+                    <div class="notes-mock">
+                        <div class="notes-title">&#128221; Avondreflectie - 28 juni 2026</div>
+                        <div class="notes-line"><strong>&#127775; 3 dingen waar ik dankbaar voor ben:</strong></div>
+                        <div class="notes-line">1. Goed gesprek met mijn partner gehad</div>
+                        <div class="notes-line">2. PR op squats gebroken (90 kg!)</div>
+                        <div class="notes-line">3. Binnen budget gebleven deze week</div>
+                        <div class="notes-line">&nbsp;</div>
+                        <div class="notes-line"><strong>&#128170; Gezondheid:</strong> Training gedaan, 135g eiwit gehaald</div>
+                        <div class="notes-line"><strong>&#128149; Relatie:</strong> Samen gekookt vanavond</div>
+                        <div class="notes-line"><strong>&#128176; Financien:</strong> Automatische spaaropdracht loopt</div>
+                        <div class="notes-line">&nbsp;</div>
+                        <div class="notes-line"><strong>&#128161; Leerpunt:</strong> Moet eerder naar bed, was 23:00</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Alternatief: Apple Notities</h4>
+                            <p>Maak een map <strong>"Dagboek 2026"</strong> in Notities. Maak een template-notitie die je dagelijks kopieert:</p>
+                            <ul style="font-size:0.88em;color:#555;margin-top:4px;padding-left:16px;">
+                                <li>Pin de template bovenaan de map</li>
+                                <li>Kopieer en vul elke avond in</li>
+                                <li>Gebruik checklists voor gewoonten</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Herinneringen: Avondroutine</h4>
+                            <p>Stel een dagelijkse herinnering in om 21:30:<br>
+                            <strong>"Tijd voor je avondreflectie - open je Dagboek"</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Ademhaling & Mindfulness</h4>
+                            <p>Gebruik de <strong>Ademhaling</strong>-functie in Apple Watch of de Gezondheid-app:<br>
+                            &bull; Stel een dagelijkse herinnering in voor 21:25<br>
+                            &bull; 3-5 minuten diepe ademhaling voor je dagboek<br>
+                            &bull; Dit staat automatisch in je Gezondheid-data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOGLE -->
+            <div class="platform-card">
+                <div class="platform-card-header google">G Google Workspace aanpak</div>
+                <div class="platform-card-body">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Google Docs: Dagboek Document</h4>
+                            <p>Maak in Google Drive een document <strong>"Dagboek 2026"</strong>. Gebruik een vast template per dag:</p>
+                        </div>
+                    </div>
+
+                    <div class="app-mock" style="background:#fff;border:2px solid #4285F4;">
+                        <div style="font-weight:700;font-size:1em;margin-bottom:12px;color:#4285F4;">&#128196; Dagboek - 28 juni 2026</div>
+                        <div style="font-size:0.88em;line-height:1.8;">
+                            <strong>&#127775; Dankbaarheid (3 dingen):</strong><br>
+                            1. ___________________________<br>
+                            2. ___________________________<br>
+                            3. ___________________________<br><br>
+                            <strong>&#128170; Gezondheid check-in:</strong><br>
+                            Training: &#9744; Ja &#9744; Nee | Eiwit doel: &#9744; Gehaald<br>
+                            Slaap: ___ uur | Kwaliteit: &#9733;&#9733;&#9733;&#9734;&#9734;<br><br>
+                            <strong>&#128149; Relatie reflectie:</strong><br>
+                            ___________________________<br><br>
+                            <strong>&#128176; Financien:</strong><br>
+                            Binnen budget: &#9744; Ja &#9744; Nee<br><br>
+                            <strong>&#128161; Morgen beter:</strong><br>
+                            ___________________________
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Google Keep: Snelle dankbaarheidsnotitie</h4>
+                            <p>Maak een <strong>vastgepinde Keep-notitie</strong> voor snelle dagelijkse dankbaarheid als je geen tijd hebt voor het volledige dagboek:</p>
+                        </div>
+                    </div>
+
+                    <div class="keep-mock" style="background:#E8F5E9;border-color:#A5D6A7;">
+                        <div class="keep-title">&#127775; Dankbaarheid Vandaag</div>
+                        <div class="keep-check"><div class="keep-box"></div> <span>Ik ben dankbaar voor...</span></div>
+                        <div class="keep-check"><div class="keep-box"></div> <span>Vandaag ging goed...</span></div>
+                        <div class="keep-check"><div class="keep-box"></div> <span>Morgen wil ik...</span></div>
+                        <div style="font-size:0.75em;color:#666;margin-top:8px;">Labels: #dagboek #dankbaarheid</div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Google Sheets: Gewoontetracker</h4>
+                            <p>Voeg een tabblad <strong>"Gewoonten"</strong> toe aan je spreadsheet:</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>Gewoonte</th>
+                                <th>Ma</th>
+                                <th>Di</th>
+                                <th>Wo</th>
+                                <th>Do</th>
+                                <th>Vr</th>
+                                <th>Za</th>
+                                <th>Zo</th>
+                            </tr>
+                            <tr>
+                                <td>Dagboek geschreven</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                            </tr>
+                            <tr>
+                                <td>Eiwit doel gehaald</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                            </tr>
+                            <tr>
+                                <td>Op tijd naar bed (22:30)</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#9989;</td>
+                            </tr>
+                            <tr>
+                                <td>Binnen budget</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                            </tr>
+                            <tr>
+                                <td>Ademhalingsoefening</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#9989;</td>
+                                <td style="text-align:center">&#10060;</td>
+                                <td style="text-align:center">&#9989;</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Google Agenda: Avondroutine blok</h4>
+                            <p>Maak een dagelijks terugkerend event:<br>
+                            <strong>21:25-21:35</strong> - Ademhaling & meditatie<br>
+                            <strong>21:35-21:45</strong> - Dagboek schrijven</p>
+                        </div>
+                    </div>
+
+                    <div class="tip-box mindful">
+                        <div class="tip-icon">&#128161;</div>
+                        <div class="tip-text">
+                            <strong>Pro tip: Accountability</strong>
+                            Deel je Google Sheets gewoontetracker met je accountability-partner. Zij kunnen je voortgang live volgen en je motiveren via opmerkingen in het document.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- QUICK START CHECKLIST                      -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="quickstart">
+        <h2>&#127937; Snelstart Checklist</h2>
+        <p style="color:#666;margin-bottom:20px;font-size:0.9em;">Doe dit vandaag nog om je systeem op te zetten. Kies Apple <strong>of</strong> Google, of combineer beide!</p>
+
+        <div class="qs-grid">
+            <div class="qs-item">
+                <div class="qs-num">1</div>
+                <div>
+                    <h4>Agenda opzetten (10 min)</h4>
+                    <p>Maak 4 kleur-agenda's aan en plan je voorbeelddag in als terugkerend schema.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">2</div>
+                <div>
+                    <h4>Takenlijsten maken (5 min)</h4>
+                    <p>Maak je Eisenhower-lijsten aan in Herinneringen of Google Tasks/Keep.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">3</div>
+                <div>
+                    <h4>Fitness Spreadsheet (15 min)</h4>
+                    <p>Maak je trainingslog en voedingsoverzicht in Numbers of Google Sheets.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">4</div>
+                <div>
+                    <h4>Budget Spreadsheet (15 min)</h4>
+                    <p>Zet je inkomsten, vaste lasten en spaardoel in een financieel overzicht.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">5</div>
+                <div>
+                    <h4>Dagboek template (5 min)</h4>
+                    <p>Maak je eerste dagboekinvoer met het dankbaarheidstemplate.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">6</div>
+                <div>
+                    <h4>Herinneringen instellen (5 min)</h4>
+                    <p>Stel dagelijkse herinneringen in voor: ochtendstart, avondreflectie en bedtijd.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">7</div>
+                <div>
+                    <h4>Slaapschema activeren (3 min)</h4>
+                    <p>Stel 22:30-06:30 in als vast slaapschema met Slaapfocus.</p>
+                </div>
+            </div>
+            <div class="qs-item">
+                <div class="qs-num">8</div>
+                <div>
+                    <h4>Accountability partner (5 min)</h4>
+                    <p>Deel je spreadsheet(s) met je coach of partner voor verantwoording.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAPPENSTRUCTUUR -->
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);padding:30px;margin:30px 0;">
+        <h2 style="margin-bottom:16px;">&#128193; Aanbevolen mappenstructuur</h2>
+        <div class="platform-split">
+            <div>
+                <h4 style="margin-bottom:10px;">&#63743; iCloud Drive</h4>
+                <div style="font-family:monospace;font-size:0.85em;background:#F2F2F7;padding:16px;border-radius:8px;line-height:2;">
+                    &#128193; Persoonlijk Plan/<br>
+                    &nbsp;&nbsp;&#128193; Dagplanning/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128196; Top 3 Template.numbers<br>
+                    &nbsp;&nbsp;&#128193; Fitness/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Training Tracker.numbers<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Voedingslog.numbers<br>
+                    &nbsp;&nbsp;&#128193; Financien/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Budget 2026.numbers<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Noodfonds Tracker.numbers<br>
+                    &nbsp;&nbsp;&#128193; Dagboek/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128221; Template Avondreflectie<br>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom:10px;">G Google Drive</h4>
+                <div style="font-family:monospace;font-size:0.85em;background:#F2F2F7;padding:16px;border-radius:8px;line-height:2;">
+                    &#128193; Persoonlijk Plan/<br>
+                    &nbsp;&nbsp;&#128193; Dagplanning/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128196; Weekplanning Template (Doc)<br>
+                    &nbsp;&nbsp;&#128193; Fitness/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Fitness Tracker (Sheet)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Maaltijdplan (Sheet)<br>
+                    &nbsp;&nbsp;&#128193; Financien/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Financieel Overzicht 2026 (Sheet)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128202; Beleggingslog (Sheet)<br>
+                    &nbsp;&nbsp;&#128193; Dagboek/<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128221; Dagboek 2026 (Doc)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&#128221; Gewoontetracker (Sheet)<br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Handleiding gebaseerd op je Persoonlijk Dagelijks Plan en Adviezen</p>
+    <p style="margin-top:4px;">Apple iCloud &amp; Google Workspace Implementatiegids | 2026</p>
+</div>
+
+</body>
+</html>
