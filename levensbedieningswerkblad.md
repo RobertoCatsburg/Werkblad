@@ -14,33 +14,36 @@
 
 ## 2. Gezondheid en Welzijn
 
+> **Actief doel:** Zichtbare buikspieren in 10 weken (28 juni - 5 september 2026)
+> Zie [buikspierplan-10-weken.md](buikspierplan-10-weken.md) voor het volledige plan.
+
 | Categorie | Details |
 |-----------|---------|
-| **Lichaamsbeweging** | Type: [invullen] — Duur: [invullen] |
-| **Voedingsplan** | Ontbijt: [invullen] |
-| | Lunch: [invullen] |
-| | Diner: [invullen] |
-| | Snacks: [invullen] |
-| **Slaapritme** | Bedtijd: [invullen] — Wektijd: [invullen] — Kwaliteit: [invullen] |
+| **Lichaamsbeweging** | Type: Core + compound training — Duur: 45-60 min, 4-6x per week |
+| **Voedingsplan** | Ontbijt: Havermout + whey + fruit |
+| | Lunch: Kipfilet + rijst + groenten |
+| | Diner: Vis/kip + zoete aardappel + groenten |
+| | Snacks: Kwark, rijstwafel + pindakaas, whey shake |
+| **Slaapritme** | Bedtijd: 22:30 — Wektijd: 06:30 — Doel: 7-8 uur |
 
 ---
 
 ## 3. Doelen en Prioriteiten
 
 ### Korte-termijndoelen
-- [ ] [invullen]
-- [ ] [invullen]
-- [ ] [invullen]
+- [ ] Week 1-3: Voedingsgewoonten omgooien, calorieen en eiwit tracken
+- [ ] Week 4-6: Training opschalen naar 5x per week, buikomvang meten
+- [ ] Week 7-10: Verfijnen, consistentie vasthouden, eindresultaat bereiken
 
 ### Lange-termijndoelen
-- [ ] [invullen]
-- [ ] [invullen]
-- [ ] [invullen]
+- [ ] Zichtbare buikspieren bereiken (vetpercentage 10-12%)
+- [ ] Gezonde eetgewoonten als levensstijl vasthouden
+- [ ] Sterke core voor algehele fitheid en blessurepreventie
 
 ### Dagelijkse Top 3 Prioriteiten
-1. [invullen]
-2. [invullen]
-3. [invullen]
+1. Eiwitdoel halen (1.8-2.2g/kg)
+2. Training of actief herstel uitvoeren
+3. Voldoende water drinken (2.5-3L)
 
 ---
 
