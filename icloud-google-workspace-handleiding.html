@@ -603,6 +603,358 @@
             font-size: 0.85em;
         }
 
+        /* ══════════════════════════════════════ */
+        /* DATABASE & PROJECT OVERVIEW STYLES    */
+        /* ══════════════════════════════════════ */
+
+        .db-section {
+            margin: 50px 0;
+        }
+        .db-section-header {
+            background: linear-gradient(135deg, #0F172A, #1E293B);
+            color: white;
+            padding: 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .db-section-header h2 {
+            font-size: 1.5em;
+            margin-bottom: 6px;
+        }
+        .db-section-header p {
+            opacity: 0.7;
+            font-size: 0.9em;
+        }
+        .db-body {
+            background: white;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        /* Database Table */
+        .db-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+        .db-table thead th {
+            background: #F8FAFC;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            color: #475569;
+            border-bottom: 2px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .db-table tbody td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #F1F5F9;
+            vertical-align: middle;
+        }
+        .db-table tbody tr:hover {
+            background: #F8FAFC;
+        }
+        .db-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Status Badges */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.82em;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .status-active { background: #DCFCE7; color: #166534; }
+        .status-planned { background: #DBEAFE; color: #1E40AF; }
+        .status-progress { background: #FEF9C3; color: #854D0E; }
+        .status-done { background: #F0FDF4; color: #15803D; }
+        .status-not-started { background: #F1F5F9; color: #64748B; }
+        .status-daily { background: #EDE9FE; color: #6D28D9; }
+        .status-weekly { background: #FCE7F3; color: #BE185D; }
+        .status-monthly { background: #FFF7ED; color: #C2410C; }
+        .status-quarterly { background: #ECFDF5; color: #047857; }
+
+        /* Priority indicators */
+        .priority {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+        .priority-critical { background: #EF4444; }
+        .priority-high { background: #F97316; }
+        .priority-medium { background: #EAB308; }
+        .priority-low { background: #22C55E; }
+
+        /* Pillar Tags */
+        .pillar-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .pillar-tag-routine { background: #EDE9FE; color: #5B21B6; }
+        .pillar-tag-health { background: #DCFCE7; color: #166534; }
+        .pillar-tag-finance { background: #FEF3C7; color: #92400E; }
+        .pillar-tag-mindful { background: #F3E8FF; color: #7E22CE; }
+
+        /* Project Card Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 24px;
+        }
+        .project-card {
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .project-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .project-card-top {
+            padding: 16px 18px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .project-card-top h4 {
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+        .project-card-top .project-desc {
+            font-size: 0.82em;
+            color: #64748B;
+        }
+        .project-card-body {
+            padding: 14px 18px;
+        }
+        .project-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 0.85em;
+        }
+        .project-stat-label { color: #64748B; }
+        .project-stat-value { font-weight: 600; }
+
+        /* KPI Cards */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            padding: 20px 24px;
+            background: #F8FAFC;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .kpi-card {
+            background: white;
+            border-radius: 10px;
+            padding: 14px 16px;
+            border: 1px solid #E2E8F0;
+        }
+        .kpi-label {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94A3B8;
+            font-weight: 600;
+        }
+        .kpi-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 4px 0 2px;
+        }
+        .kpi-sub {
+            font-size: 0.78em;
+            color: #64748B;
+        }
+        .kpi-trend-up { color: #16A34A; }
+        .kpi-trend-down { color: #DC2626; }
+        .kpi-trend-neutral { color: #64748B; }
+
+        /* Relation arrows */
+        .relation {
+            font-size: 0.8em;
+            color: #94A3B8;
+            padding: 1px 6px;
+            background: #F1F5F9;
+            border-radius: 4px;
+            cursor: default;
+        }
+
+        /* Database tabs */
+        .db-tabs {
+            display: flex;
+            border-bottom: 2px solid #E2E8F0;
+            background: #FAFBFC;
+            overflow-x: auto;
+        }
+        .db-tab {
+            padding: 12px 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #64748B;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+            cursor: default;
+        }
+        .db-tab.active {
+            color: #1E293B;
+            border-bottom-color: #3B82F6;
+        }
+
+        /* Timeline */
+        .timeline {
+            padding: 20px 24px;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            padding-bottom: 24px;
+            position: relative;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 32px;
+            bottom: 0;
+            width: 2px;
+            background: #E2E8F0;
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            flex-shrink: 0;
+            color: white;
+            font-weight: 700;
+            z-index: 1;
+        }
+        .timeline-content h4 { font-size: 0.92em; margin-bottom: 2px; }
+        .timeline-content p { font-size: 0.82em; color: #64748B; }
+        .timeline-date {
+            font-size: 0.75em;
+            color: #94A3B8;
+            font-weight: 600;
+        }
+
+        /* Kanban */
+        .kanban {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 20px 24px;
+        }
+        @media (max-width: 768px) {
+            .kanban { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .kanban { grid-template-columns: 1fr; }
+        }
+        .kanban-col {
+            background: #F8FAFC;
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .kanban-col-header {
+            font-weight: 700;
+            font-size: 0.82em;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .kanban-count {
+            background: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+        }
+        .kanban-card {
+            background: white;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            font-size: 0.82em;
+            border-left: 3px solid;
+        }
+        .kanban-card:last-child { margin-bottom: 0; }
+        .kanban-card-title { font-weight: 600; margin-bottom: 4px; }
+        .kanban-card-meta { color: #94A3B8; font-size: 0.9em; }
+
+        /* ERD Diagram */
+        .erd-container {
+            padding: 24px;
+            overflow-x: auto;
+        }
+        .erd-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            min-width: 700px;
+        }
+        @media (max-width: 768px) {
+            .erd-grid { grid-template-columns: 1fr; min-width: unset; }
+        }
+        .erd-table {
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .erd-table-header {
+            padding: 10px 14px;
+            font-weight: 700;
+            font-size: 0.85em;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .erd-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 14px;
+            font-size: 0.8em;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .erd-field:last-child { border-bottom: none; }
+        .erd-field-name { font-weight: 500; }
+        .erd-field-type { color: #94A3B8; font-family: monospace; font-size: 0.9em; }
+        .erd-key { color: #EAB308; margin-right: 3px; }
+
         /* Print */
         @media print {
             .hero { background: #667eea !important; -webkit-print-color-adjust: exact; }
@@ -1684,6 +2036,1563 @@
                     <h4>Accountability partner (5 min)</h4>
                     <p>Deel je spreadsheet(s) met je coach of partner voor verantwoording.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- DATABASE OVERZICHT: RELATIONEEL MODEL            -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header">
+            <h2>&#128450; Database Architectuur</h2>
+            <p>Relationeel model van alle tabellen die je systeem vormen - bouw dit na in Google Sheets/Numbers of Airtable/Notion</p>
+        </div>
+        <div class="db-body">
+            <!-- ERD -->
+            <div class="db-tabs">
+                <div class="db-tab active">&#128200; Entity Relationship Diagram</div>
+                <div class="db-tab">&#128196; Tabeloverzicht</div>
+                <div class="db-tab">&#128279; Relaties</div>
+            </div>
+
+            <div class="erd-container">
+                <div class="erd-grid">
+                    <!-- Tabel: Dagplanning -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:var(--pillar-routine);">&#128197; dagplanning</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">datum</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dag_van_week</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">top3_taak_1</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">top3_taak_2</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">top3_taak_3</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">taken_voltooid</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">productiviteit_score</span><span class="erd-field-type">RATING &#9733;</span></div>
+                        <div class="erd-field"><span class="erd-field-name">ochtend_ritueel_done</span><span class="erd-field-type">CHECKBOX</span></div>
+                        <div class="erd-field"><span class="erd-field-name">vertrek_tijd</span><span class="erd-field-type">TIME</span></div>
+                        <div class="erd-field"><span class="erd-field-name">werk_start</span><span class="erd-field-type">TIME</span></div>
+                        <div class="erd-field"><span class="erd-field-name">werk_einde</span><span class="erd-field-type">TIME</span></div>
+                        <div class="erd-field"><span class="erd-field-name">notities</span><span class="erd-field-type">LONGTEXT</span></div>
+                    </div>
+
+                    <!-- Tabel: Taken -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:var(--pillar-routine);">&#9745; taken</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">titel</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">beschrijving</span><span class="erd-field-type">LONGTEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">pijler</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">eisenhower_kwadrant</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">prioriteit</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">status</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">deadline</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">herhalend</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dagplanning_id</span><span class="erd-field-type">&#128279; LINK</span></div>
+                        <div class="erd-field"><span class="erd-field-name">voltooid_op</span><span class="erd-field-type">DATETIME</span></div>
+                    </div>
+
+                    <!-- Tabel: Trainingen -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:var(--pillar-health);">&#128170; trainingen</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">datum</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">type</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">focus</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">duur_min</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">energie_voor</span><span class="erd-field-type">RATING</span></div>
+                        <div class="erd-field"><span class="erd-field-name">energie_na</span><span class="erd-field-type">RATING</span></div>
+                        <div class="erd-field"><span class="erd-field-name">oefeningen</span><span class="erd-field-type">&#128279; LINK</span></div>
+                        <div class="erd-field"><span class="erd-field-name">notities</span><span class="erd-field-type">LONGTEXT</span></div>
+                    </div>
+
+                    <!-- Tabel: Oefeningen -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:var(--pillar-health);">&#127947; oefeningen_log</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">training_id</span><span class="erd-field-type">&#128279; LINK</span></div>
+                        <div class="erd-field"><span class="erd-field-name">oefening_naam</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">sets</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">reps</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">gewicht_kg</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">rpe</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">pr_gebroken</span><span class="erd-field-type">CHECKBOX</span></div>
+                        <div class="erd-field"><span class="erd-field-name">vorig_gewicht_kg</span><span class="erd-field-type">FORMULA</span></div>
+                    </div>
+
+                    <!-- Tabel: Voeding -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:#059669;">&#127860; voeding</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">datum</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">maaltijd</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">beschrijving</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">calorieen</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">eiwit_g</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">koolhydraten_g</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">vet_g</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dag_totaal_kcal</span><span class="erd-field-type">ROLLUP</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dag_totaal_eiwit</span><span class="erd-field-type">ROLLUP</span></div>
+                    </div>
+
+                    <!-- Tabel: Lichaamsmetingen -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:#0891B2;">&#9878; lichaamsmetingen</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">datum</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">gewicht_kg</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">vetpercentage</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">taille_cm</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">borst_cm</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">armen_cm</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">foto_link</span><span class="erd-field-type">URL</span></div>
+                        <div class="erd-field"><span class="erd-field-name">trend_gewicht</span><span class="erd-field-type">FORMULA</span></div>
+                    </div>
+
+                    <!-- Tabel: Financien -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:var(--pillar-finance);">&#128176; financien_maand</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">maand</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">netto_inkomen</span><span class="erd-field-type">CURRENCY</span></div>
+                        <div class="erd-field"><span class="erd-field-name">totaal_uitgaven</span><span class="erd-field-type">ROLLUP</span></div>
+                        <div class="erd-field"><span class="erd-field-name">gespaard</span><span class="erd-field-type">CURRENCY</span></div>
+                        <div class="erd-field"><span class="erd-field-name">spaarpercentage</span><span class="erd-field-type">FORMULA %</span></div>
+                        <div class="erd-field"><span class="erd-field-name">noodfonds_stand</span><span class="erd-field-type">CURRENCY</span></div>
+                        <div class="erd-field"><span class="erd-field-name">autoschuld_stand</span><span class="erd-field-type">CURRENCY</span></div>
+                        <div class="erd-field"><span class="erd-field-name">belegging_waarde</span><span class="erd-field-type">CURRENCY</span></div>
+                        <div class="erd-field"><span class="erd-field-name">transacties</span><span class="erd-field-type">&#128279; LINK</span></div>
+                    </div>
+
+                    <!-- Tabel: Transacties -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:#B45309;">&#128179; transacties</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">datum</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">omschrijving</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">categorie</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">bedrag</span><span class="erd-field-type">CURRENCY</span></div>
+                        <div class="erd-field"><span class="erd-field-name">type</span><span class="erd-field-type">SELECT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">maand_id</span><span class="erd-field-type">&#128279; LINK</span></div>
+                        <div class="erd-field"><span class="erd-field-name">binnen_budget</span><span class="erd-field-type">FORMULA</span></div>
+                    </div>
+
+                    <!-- Tabel: Dagboek -->
+                    <div class="erd-table">
+                        <div class="erd-table-header" style="background:var(--pillar-mindfulness);">&#128221; dagboek</div>
+                        <div class="erd-field"><span class="erd-field-name"><span class="erd-key">&#128273;</span> id</span><span class="erd-field-type">AUTO_ID</span></div>
+                        <div class="erd-field"><span class="erd-field-name">datum</span><span class="erd-field-type">DATE</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dankbaar_1</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dankbaar_2</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dankbaar_3</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">stemming_score</span><span class="erd-field-type">RATING</span></div>
+                        <div class="erd-field"><span class="erd-field-name">gezondheid_check</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">relatie_check</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">financien_check</span><span class="erd-field-type">TEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">leerpunt</span><span class="erd-field-type">LONGTEXT</span></div>
+                        <div class="erd-field"><span class="erd-field-name">ademhaling_done</span><span class="erd-field-type">CHECKBOX</span></div>
+                        <div class="erd-field"><span class="erd-field-name">slaap_uren</span><span class="erd-field-type">NUMBER</span></div>
+                        <div class="erd-field"><span class="erd-field-name">dagplanning_id</span><span class="erd-field-type">&#128279; LINK</span></div>
+                    </div>
+                </div>
+
+                <!-- Relatie-uitleg -->
+                <div style="margin-top:24px;padding:16px 20px;background:#F8FAFC;border-radius:10px;border:1px solid #E2E8F0;">
+                    <h4 style="font-size:0.9em;margin-bottom:10px;">&#128279; Relaties tussen tabellen</h4>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;font-size:0.82em;color:#475569;">
+                        <div>&#128197; <strong>dagplanning</strong> 1&#8596;N &#9745; <strong>taken</strong> <span class="relation">dagplanning_id</span></div>
+                        <div>&#128197; <strong>dagplanning</strong> 1&#8596;1 &#128221; <strong>dagboek</strong> <span class="relation">dagplanning_id</span></div>
+                        <div>&#128170; <strong>trainingen</strong> 1&#8596;N &#127947; <strong>oefeningen_log</strong> <span class="relation">training_id</span></div>
+                        <div>&#128176; <strong>financien_maand</strong> 1&#8596;N &#128179; <strong>transacties</strong> <span class="relation">maand_id</span></div>
+                        <div>&#128197; <strong>dagplanning.datum</strong> = &#128170; <strong>trainingen.datum</strong> <span class="relation">datum join</span></div>
+                        <div>&#128197; <strong>dagplanning.datum</strong> = &#127860; <strong>voeding.datum</strong> <span class="relation">datum join</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- MASTER DATABASE VIEW: ALLE DOELEN & TAKEN          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header">
+            <h2>&#128202; Master Database: Alle Doelen & Taken</h2>
+            <p>Compleet overzicht van elk doel, elke gewoonte en elke metric over alle 4 pijlers</p>
+        </div>
+        <div class="db-body">
+            <!-- KPI Row -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-label">Totaal doelen</div>
+                    <div class="kpi-value">24</div>
+                    <div class="kpi-sub kpi-trend-neutral">Across 4 pijlers</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Dagelijkse gewoonten</div>
+                    <div class="kpi-value">11</div>
+                    <div class="kpi-sub kpi-trend-up">&#9650; 86% consistency</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Wekelijkse taken</div>
+                    <div class="kpi-value">8</div>
+                    <div class="kpi-sub kpi-trend-up">&#9650; 5/8 voltooid</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Noodfonds</div>
+                    <div class="kpi-value" style="color:var(--pillar-finance);">33%</div>
+                    <div class="kpi-sub kpi-trend-up">&#9650; &#8364;3.400 / &#8364;10.200</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Lichaamsvet</div>
+                    <div class="kpi-value" style="color:var(--pillar-health);">16%</div>
+                    <div class="kpi-sub kpi-trend-down">&#9660; -1,2% deze maand</div>
+                </div>
+            </div>
+
+            <!-- Database tabs -->
+            <div class="db-tabs">
+                <div class="db-tab active">&#128203; Alle items</div>
+                <div class="db-tab">&#128197; Dagelijks</div>
+                <div class="db-tab">&#128467; Wekelijks</div>
+                <div class="db-tab">&#128197; Maandelijks</div>
+                <div class="db-tab">&#127919; Jaardoelen</div>
+            </div>
+
+            <!-- Master Table -->
+            <div style="overflow-x:auto;">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>Pijler</th>
+                            <th>Doel / Taak / Gewoonte</th>
+                            <th>Type</th>
+                            <th>Frequentie</th>
+                            <th>KPI / Metric</th>
+                            <th>Doel waarde</th>
+                            <th>Huidig</th>
+                            <th>Status</th>
+                            <th>Tool</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- DAGPLANNING -->
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-routine">&#128197; Planning</span></td>
+                            <td><strong>Top 3 prioriteiten bepalen</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Completion rate</td>
+                            <td>100%</td>
+                            <td>86%</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Herinneringen / Tasks</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-routine">&#128197; Planning</span></td>
+                            <td><strong>Ochtendritueel uitvoeren</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Streakdagen</td>
+                            <td>30 dagen</td>
+                            <td>12 dagen</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Agenda</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-routine">&#128197; Planning</span></td>
+                            <td><strong>Vertrek 07:45 naar kantoor</strong></td>
+                            <td>Routine</td>
+                            <td><span class="status status-daily">Werkdagen</span></td>
+                            <td>Op-tijd %</td>
+                            <td>95%</td>
+                            <td>80%</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Agenda alarm</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-routine">&#128197; Planning</span></td>
+                            <td><strong>Eisenhower-matrix bijwerken</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Taken gecategoriseerd</td>
+                            <td>Alle taken</td>
+                            <td>-</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Keep / Herinneringen</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-routine">&#128197; Planning</span></td>
+                            <td><strong>Weekplanning maken</strong></td>
+                            <td>Taak</td>
+                            <td><span class="status status-weekly">Wekelijks</span></td>
+                            <td>Zondagavond gedaan</td>
+                            <td>Elke zo</td>
+                            <td>3/4 weken</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Agenda / Docs</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-routine">&#128197; Planning</span></td>
+                            <td><strong>Accountability check-in</strong></td>
+                            <td>Afspraak</td>
+                            <td><span class="status status-weekly">Wekelijks</span></td>
+                            <td>Sessies gehad</td>
+                            <td>4/maand</td>
+                            <td>3/maand</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Agenda</td>
+                        </tr>
+
+                        <!-- GEZONDHEID -->
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Krachttraining sessie</strong></td>
+                            <td>Training</td>
+                            <td><span class="status status-weekly">3x/week</span></td>
+                            <td>Sessies voltooid</td>
+                            <td>12/maand</td>
+                            <td>10/maand</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Sheets / Numbers</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Cardio/HIIT sessie</strong></td>
+                            <td>Training</td>
+                            <td><span class="status status-weekly">1-2x/week</span></td>
+                            <td>Sessies voltooid</td>
+                            <td>6/maand</td>
+                            <td>5/maand</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Sheets / Numbers</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Eiwit doel halen (90-150g)</strong></td>
+                            <td>Voeding</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Gram eiwit/dag</td>
+                            <td>&#8805; 120g</td>
+                            <td>128g gem.</td>
+                            <td><span class="status status-done">&#9679; Op doel</span></td>
+                            <td>Sheets / Gezondheid</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Calorietekort handhaven</strong></td>
+                            <td>Voeding</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Kcal/dag</td>
+                            <td>1.900-2.200</td>
+                            <td>2.050 gem.</td>
+                            <td><span class="status status-done">&#9679; Op doel</span></td>
+                            <td>Sheets / Gezondheid</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Progressieve overbelasting</strong></td>
+                            <td>Doel</td>
+                            <td><span class="status status-weekly">Per sessie</span></td>
+                            <td>Gewicht &#8593; per oef.</td>
+                            <td>+2,5kg/2wk</td>
+                            <td>+2kg/2wk</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Sheets / Numbers</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Lichaamsvet naar &lt;12%</strong></td>
+                            <td>Jaardoel</td>
+                            <td><span class="status status-monthly">Maandelijks meten</span></td>
+                            <td>Vetpercentage</td>
+                            <td>&lt; 12%</td>
+                            <td>16%</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Gezondheid / Sheets</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>7-9 uur slaap per nacht</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Gem. slaapuren</td>
+                            <td>&#8805; 7,5 uur</td>
+                            <td>7,2 uur</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Gezondheid / Slaap</td>
+                        </tr>
+                        <tr style="background:#FAFFFE;">
+                            <td><span class="pillar-tag pillar-tag-health">&#128170; Gezondheid</span></td>
+                            <td><strong>Gewicht wekelijks wegen</strong></td>
+                            <td>Meting</td>
+                            <td><span class="status status-weekly">Wekelijks</span></td>
+                            <td>Trend richting</td>
+                            <td>Dalend</td>
+                            <td>&#8595; 0,3kg/wk</td>
+                            <td><span class="status status-done">&#9679; Op doel</span></td>
+                            <td>Gezondheid / Sheets</td>
+                        </tr>
+
+                        <!-- FINANCIEN -->
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-finance">&#128176; Financien</span></td>
+                            <td><strong>Noodfonds opbouwen (6 mnd)</strong></td>
+                            <td>Jaardoel</td>
+                            <td><span class="status status-monthly">Maandelijks</span></td>
+                            <td>Saldo noodfonds</td>
+                            <td>&#8364; 10.200</td>
+                            <td>&#8364; 3.400</td>
+                            <td><span class="status status-progress">&#9679; 33%</span></td>
+                            <td>Sheets / Numbers</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-finance">&#128176; Financien</span></td>
+                            <td><strong>20% van salaris sparen</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-monthly">Maandelijks</span></td>
+                            <td>Spaarpercentage</td>
+                            <td>&#8805; 20%</td>
+                            <td>20%</td>
+                            <td><span class="status status-done">&#9679; Op doel</span></td>
+                            <td>Auto-overboeking</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-finance">&#128176; Financien</span></td>
+                            <td><strong>Budget bijhouden</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-weekly">Wekelijks</span></td>
+                            <td>Binnen budget %</td>
+                            <td>&#8805; 90%</td>
+                            <td>85%</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Sheets / Numbers</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-finance">&#128176; Financien</span></td>
+                            <td><strong>Autolening evalueren</strong></td>
+                            <td>Beslissing</td>
+                            <td><span class="status status-quarterly">Elk kwartaal</span></td>
+                            <td>Rente vs rendement</td>
+                            <td>Analyse</td>
+                            <td>-</td>
+                            <td><span class="status status-planned">&#9679; Gepland</span></td>
+                            <td>Sheets</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pillar-tag pillar-tag-finance">&#128176; Financien</span></td>
+                            <td><strong>ETF beleggingsplan starten</strong></td>
+                            <td>Mijlpaal</td>
+                            <td><span class="status status-monthly">Na buffer vol</span></td>
+                            <td>Portefeuillewaarde</td>
+                            <td>Start</td>
+                            <td>Wacht op buffer</td>
+                            <td><span class="status status-not-started">&#9679; Wachtend</span></td>
+                            <td>Sheets</td>
+                        </tr>
+
+                        <!-- REFLECTIE -->
+                        <tr style="background:#FDFAFF;">
+                            <td><span class="pillar-tag pillar-tag-mindful">&#128221; Reflectie</span></td>
+                            <td><strong>Avondreflectie schrijven</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Streakdagen</td>
+                            <td>30 dagen</td>
+                            <td>18 dagen</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Journal / Docs</td>
+                        </tr>
+                        <tr style="background:#FDFAFF;">
+                            <td><span class="pillar-tag pillar-tag-mindful">&#128221; Reflectie</span></td>
+                            <td><strong>3 dankbaarheden noteren</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Completion rate</td>
+                            <td>100%</td>
+                            <td>90%</td>
+                            <td><span class="status status-active">&#9679; Actief</span></td>
+                            <td>Journal / Keep</td>
+                        </tr>
+                        <tr style="background:#FDFAFF;">
+                            <td><span class="pillar-tag pillar-tag-mindful">&#128221; Reflectie</span></td>
+                            <td><strong>Ademhalingsoefening (3-5 min)</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Keren per week</td>
+                            <td>7x/week</td>
+                            <td>5x/week</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Ademhaling / Agenda</td>
+                        </tr>
+                        <tr style="background:#FDFAFF;">
+                            <td><span class="pillar-tag pillar-tag-mindful">&#128221; Reflectie</span></td>
+                            <td><strong>Bedtijd 22:30 aanhouden</strong></td>
+                            <td>Gewoonte</td>
+                            <td><span class="status status-daily">Dagelijks</span></td>
+                            <td>Op-tijd %</td>
+                            <td>&#8805; 90%</td>
+                            <td>71%</td>
+                            <td><span class="status status-progress">&#9679; Bezig</span></td>
+                            <td>Slaapfocus / Alarm</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- PROJECT OVERZICHT: KANBAN VIEW                     -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header">
+            <h2>&#127919; Projectoverzicht: Kanban Board</h2>
+            <p>Visueel overzicht van alle lopende projecten en hun voortgang per status</p>
+        </div>
+        <div class="db-body">
+            <div class="db-tabs">
+                <div class="db-tab active">&#128203; Kanban</div>
+                <div class="db-tab">&#128197; Timeline</div>
+                <div class="db-tab">&#128202; Dashboard</div>
+            </div>
+
+            <div class="kanban">
+                <!-- Backlog -->
+                <div class="kanban-col">
+                    <div class="kanban-col-header" style="border-color:#94A3B8;color:#475569;">
+                        Backlog <span class="kanban-count">3</span>
+                    </div>
+                    <div class="kanban-card" style="border-color:#94A3B8;">
+                        <div class="kanban-card-title"><span class="priority priority-medium"></span> ETF beleggingsplan starten</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-finance">&#128176;</span> Na noodfonds vol</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#94A3B8;">
+                        <div class="kanban-card-title"><span class="priority priority-low"></span> Portefeuille rebalancen</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-finance">&#128176;</span> Elk kwartaal</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#94A3B8;">
+                        <div class="kanban-card-title"><span class="priority priority-medium"></span> Autolening analyse</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-finance">&#128176;</span> Q3 2026</div>
+                    </div>
+                </div>
+
+                <!-- In Progress -->
+                <div class="kanban-col">
+                    <div class="kanban-col-header" style="border-color:#3B82F6;color:#1E40AF;">
+                        In Progress <span class="kanban-count">5</span>
+                    </div>
+                    <div class="kanban-card" style="border-color:#3B82F6;">
+                        <div class="kanban-card-title"><span class="priority priority-critical"></span> Noodfonds opbouwen</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-finance">&#128176;</span> 33% - &#8364;3.400/&#8364;10.200</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#3B82F6;">
+                        <div class="kanban-card-title"><span class="priority priority-high"></span> Body recomposition</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-health">&#128170;</span> 16% &#8594; 12% vet</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#3B82F6;">
+                        <div class="kanban-card-title"><span class="priority priority-high"></span> Progressieve overbelasting</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-health">&#128170;</span> +2kg/2wk</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#3B82F6;">
+                        <div class="kanban-card-title"><span class="priority priority-medium"></span> Slaapritme stabiliseren</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-mindful">&#128221;</span> 71% op-tijd</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#3B82F6;">
+                        <div class="kanban-card-title"><span class="priority priority-medium"></span> Dagboek-streak opbouwen</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-mindful">&#128221;</span> 18/30 dagen</div>
+                    </div>
+                </div>
+
+                <!-- Review -->
+                <div class="kanban-col">
+                    <div class="kanban-col-header" style="border-color:#F59E0B;color:#92400E;">
+                        Review <span class="kanban-count">2</span>
+                    </div>
+                    <div class="kanban-card" style="border-color:#F59E0B;">
+                        <div class="kanban-card-title"><span class="priority priority-medium"></span> Maaltijdplan optimaliseren</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-health">&#128170;</span> 128g eiwit gem.</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#F59E0B;">
+                        <div class="kanban-card-title"><span class="priority priority-low"></span> Budget categorieen finetunen</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-finance">&#128176;</span> 85% binnen budget</div>
+                    </div>
+                </div>
+
+                <!-- Done -->
+                <div class="kanban-col">
+                    <div class="kanban-col-header" style="border-color:#22C55E;color:#166534;">
+                        Voltooid <span class="kanban-count">4</span>
+                    </div>
+                    <div class="kanban-card" style="border-color:#22C55E;">
+                        <div class="kanban-card-title"><span class="priority priority-critical"></span> Systeem opzetten in iCloud/GWS</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-routine">&#128197;</span> Alle tools ingericht</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#22C55E;">
+                        <div class="kanban-card-title"><span class="priority priority-high"></span> Automatisch sparen activeren</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-finance">&#128176;</span> &#8364;560/maand</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#22C55E;">
+                        <div class="kanban-card-title"><span class="priority priority-high"></span> Trainingsschema bepalen</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-health">&#128170;</span> Upper/Lower/Cardio</div>
+                    </div>
+                    <div class="kanban-card" style="border-color:#22C55E;">
+                        <div class="kanban-card-title"><span class="priority priority-medium"></span> Dagboek template gemaakt</div>
+                        <div class="kanban-card-meta"><span class="pillar-tag pillar-tag-mindful">&#128221;</span> In gebruik</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- PROJECTTIJDLIJN: ROADMAP                          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header">
+            <h2>&#128197; Projecttijdlijn & Roadmap 2026</h2>
+            <p>Fasering van je doelen over de komende maanden met mijlpalen en deadlines</p>
+        </div>
+        <div class="db-body">
+            <div class="db-tabs">
+                <div class="db-tab active">&#128197; Timeline</div>
+                <div class="db-tab">&#128202; Mijlpalen</div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background:#22C55E;">&#10003;</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">FASE 1: Juni 2026 (Nu) - Fundament leggen</div>
+                        <h4>Systeem opzetten & eerste gewoonten starten</h4>
+                        <p>
+                            &#9989; Alle agenda's, takenlijsten en spreadsheets opgezet in iCloud/Google Workspace<br>
+                            &#9989; Dagelijkse routine ingepland (07:45 vertrek, 09:00-18:00 werk)<br>
+                            &#9989; Trainingsschema bepaald (3x kracht, 1-2x cardio)<br>
+                            &#9989; Automatisch sparen geactiveerd (&#8364;560/maand)<br>
+                            &#9989; Dagboek template gemaakt en eerste entries geschreven
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background:#3B82F6;">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">FASE 2: Juli - September 2026 - Consistentie bouwen</div>
+                        <h4>Gewoonten verankeren & eerste resultaten</h4>
+                        <p>
+                            &#9744; 30-dagen streak dagboek bereiken<br>
+                            &#9744; Eiwit doel consistent &#8805;120g/dag<br>
+                            &#9744; Noodfonds naar &#8364;5.000 (49%)<br>
+                            &#9744; Vetpercentage naar 14%<br>
+                            &#9744; Alle gewichten +10% via progressieve overbelasting<br>
+                            &#9744; Accountability-partner wekelijks check-in ritme<br>
+                            &#9744; Slaapritme consistent 22:30 (&#8805;85% op-tijd)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background:#8B5CF6;">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">FASE 3: Oktober - December 2026 - Versnellen</div>
+                        <h4>Noodfonds afronden & beleggingsstart</h4>
+                        <p>
+                            &#9744; Noodfonds vol: &#8364;10.200 (6 maanden buffer) &#127881;<br>
+                            &#9744; Autolening evaluatie: versneld aflossen vs. beleggen<br>
+                            &#9744; ETF beleggingsplan starten (MSCI World)<br>
+                            &#9744; Vetpercentage naar &#8804;12% (vasculariteit zichtbaar)<br>
+                            &#9744; 90-dagen streak dagboek<br>
+                            &#9744; Kwartaal financiele review uitvoeren
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="background:var(--pillar-finance);">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">FASE 4: 2027 - Financiele onafhankelijkheid pad</div>
+                        <h4>Langetermijndoelen en vermogensopbouw</h4>
+                        <p>
+                            &#9744; Maandelijkse ETF-inleg verhogen<br>
+                            &#9744; Autoschuld strategie uitvoeren<br>
+                            &#9744; Body recomposition doelen onderhouden<br>
+                            &#9744; Gewoonten op autopilot: geen bewuste moeite meer nodig<br>
+                            &#9744; Jaarlijkse review en doelen bijstellen
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- GEDETAILLEERDE PROJECT CARDS                       -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header">
+            <h2>&#128196; Gedetailleerde Projectkaarten</h2>
+            <p>Elk project met voortgang, KPI's, tools en volgende stappen</p>
+        </div>
+        <div class="db-body">
+            <div class="project-grid">
+                <!-- Project 1: Noodfonds -->
+                <div class="project-card">
+                    <div class="project-card-top" style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <h4>&#128176; Noodfonds Opbouwen</h4>
+                            <span class="status status-progress">In Progress</span>
+                        </div>
+                        <div class="project-desc">6 maanden vaste lasten als buffer opbouwen</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-stat">
+                            <span class="project-stat-label">Doel</span>
+                            <span class="project-stat-value">&#8364; 10.200</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Huidig saldo</span>
+                            <span class="project-stat-value" style="color:#16A34A;">&#8364; 3.400</span>
+                        </div>
+                        <div class="progress-bar" style="height:10px;margin:8px 0;">
+                            <div class="progress-fill fill-orange" style="width:33%;"></div>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Maandelijkse inleg</span>
+                            <span class="project-stat-value">&#8364; 560</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Verwacht vol op</span>
+                            <span class="project-stat-value">Dec 2026</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Tools</span>
+                            <span class="project-stat-value">Sheets + Auto-overboeking</span>
+                        </div>
+                        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F1F5F9;font-size:0.82em;color:#64748B;">
+                            <strong>Volgende stap:</strong> Juli-inleg bevestigen, spaarrekening rente vergelijken
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Body Recomp -->
+                <div class="project-card">
+                    <div class="project-card-top" style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <h4>&#128170; Body Recomposition</h4>
+                            <span class="status status-progress">In Progress</span>
+                        </div>
+                        <div class="project-desc">Vetverlies + spieropbouw naar &lt;12% vetpercentage</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-stat">
+                            <span class="project-stat-label">Huidig vetpercentage</span>
+                            <span class="project-stat-value">16%</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Doel vetpercentage</span>
+                            <span class="project-stat-value" style="color:#16A34A;">&lt; 12%</span>
+                        </div>
+                        <div class="progress-bar" style="height:10px;margin:8px 0;">
+                            <div class="progress-fill fill-green" style="width:60%;"></div>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Gem. eiwit/dag</span>
+                            <span class="project-stat-value">128g &#9989;</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Gem. kcal/dag</span>
+                            <span class="project-stat-value">2.050 kcal</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Trainingen/week</span>
+                            <span class="project-stat-value">3,5x gem.</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Tools</span>
+                            <span class="project-stat-value">Sheets + Gezondheid app</span>
+                        </div>
+                        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F1F5F9;font-size:0.82em;color:#64748B;">
+                            <strong>Volgende stap:</strong> Gewichten +2,5kg op compounds, cardio frequentie verhogen naar 2x/week
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Routine -->
+                <div class="project-card">
+                    <div class="project-card-top" style="background:linear-gradient(135deg,#EDE9FE,#DDD6FE);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <h4>&#128197; Dagelijkse Routine</h4>
+                            <span class="status status-active">Actief</span>
+                        </div>
+                        <div class="project-desc">Gestructureerde dag van ochtend tot avond</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-stat">
+                            <span class="project-stat-label">Ochtendritueel streak</span>
+                            <span class="project-stat-value">12 dagen</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Top 3 completion</span>
+                            <span class="project-stat-value">86%</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Op-tijd vertrek</span>
+                            <span class="project-stat-value">80%</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Weekplanning gemaakt</span>
+                            <span class="project-stat-value">3/4 weken</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Accountability check-ins</span>
+                            <span class="project-stat-value">3/4 per maand</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Tools</span>
+                            <span class="project-stat-value">Agenda + Herinneringen/Tasks</span>
+                        </div>
+                        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F1F5F9;font-size:0.82em;color:#64748B;">
+                            <strong>Volgende stap:</strong> Ochtendritueel streak naar 30 dagen, wekker 10 min eerder
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Reflectie -->
+                <div class="project-card">
+                    <div class="project-card-top" style="background:linear-gradient(135deg,#FAF5FF,#F3E8FF);">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <h4>&#128221; Mindfulness & Reflectie</h4>
+                            <span class="status status-active">Actief</span>
+                        </div>
+                        <div class="project-desc">Dagboek, dankbaarheid en slaapritme</div>
+                    </div>
+                    <div class="project-card-body">
+                        <div class="project-stat">
+                            <span class="project-stat-label">Dagboek streak</span>
+                            <span class="project-stat-value">18 dagen</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Dankbaarheid completion</span>
+                            <span class="project-stat-value">90%</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Ademhaling/week</span>
+                            <span class="project-stat-value">5/7 dagen</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Bedtijd 22:30 compliance</span>
+                            <span class="project-stat-value">71%</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Gem. slaap</span>
+                            <span class="project-stat-value">7,2 uur</span>
+                        </div>
+                        <div class="project-stat">
+                            <span class="project-stat-label">Tools</span>
+                            <span class="project-stat-value">Journal/Docs + Slaapfocus</span>
+                        </div>
+                        <div style="margin-top:10px;padding-top:10px;border-top:1px solid #F1F5F9;font-size:0.82em;color:#64748B;">
+                            <strong>Volgende stap:</strong> Bedtijd compliance naar 85%, streak naar 30 dagen
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- GOOGLE SHEETS FORMULES REFERENTIE                  -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header">
+            <h2>&#128295; Formules & Automatisering Referentie</h2>
+            <p>Kopieer deze formules direct in je Google Sheets of Numbers om je database te automatiseren</p>
+        </div>
+        <div class="db-body">
+            <div style="overflow-x:auto;">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>Berekening</th>
+                            <th>Google Sheets Formule</th>
+                            <th>Uitleg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Dag totaal calorieen</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=SUMIFS(voeding!E:E, voeding!B:B, A2)</code></td>
+                            <td>Sommeert alle kcal voor een datum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dag totaal eiwit</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=SUMIFS(voeding!F:F, voeding!B:B, A2)</code></td>
+                            <td>Sommeert alle eiwit (g) voor een datum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eiwit doel gehaald?</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=ALS(F2>=120, "&#9989;", "&#10060;")</code></td>
+                            <td>Check of je &#8805;120g eiwit hebt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gewichtstrend (7d gem.)</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=GEMIDDELDE(INDIRECT("C"&RIJ()-6&":C"&RIJ()))</code></td>
+                            <td>Voortschrijdend 7-daags gemiddelde</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spaarpercentage</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=E2/C2*100</code></td>
+                            <td>Gespaard / netto inkomen x 100</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noodfonds voortgang</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=G2/10200*100 &amp; "%"</code></td>
+                            <td>Percentage van &#8364;10.200 doel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maanden tot vol</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=AFRONDEN.BOVEN((10200-G2)/560, 1)</code></td>
+                            <td>Resterende maanden bij &#8364;560/mnd</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gewoonte streak</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=AANTALARG(B2:H2)-AANTAL.ALS(B2:H2,"&#10060;")</code></td>
+                            <td>Telt succesvolle dagen in de week</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Progressieve overbelasting</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=ALS(D2>C2, "&#8593;+"&D2-C2&"kg", "&#8594; gelijk")</code></td>
+                            <td>Toont verschil t.o.v. vorige week</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mini sparkline grafiek</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=SPARKLINE(C2:I2, {"charttype","line";"color","green"})</code></td>
+                            <td>Mini-grafiek in de cel (gewichtstrend)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Budget alert</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=ALS(C2>B2,"&#128308; OVER","&#128994; OK")</code></td>
+                            <td>Waarschuwt als werkelijk > budget</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Live ETF koers</strong></td>
+                            <td><code style="background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:0.9em;">=GOOGLEFINANCE("IWDA.AS","price")</code></td>
+                            <td>Haalt actuele iShares MSCI World koers op</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="padding:20px 24px;">
+                <div class="tip-box">
+                    <div class="tip-icon">&#128161;</div>
+                    <div class="tip-text">
+                        <strong>Opzettip: Tabbladen structuur in Google Sheets</strong>
+                        Maak een enkele spreadsheet met deze tabbladen: <strong>Dashboard</strong> (overzicht met formules) | <strong>Dagplanning</strong> | <strong>Trainingen</strong> | <strong>Oefeningen Log</strong> | <strong>Voeding</strong> | <strong>Lichaamsmetingen</strong> | <strong>Budget</strong> | <strong>Transacties</strong> | <strong>Noodfonds</strong> | <strong>Gewoontetracker</strong> | <strong>Dagboek</strong>. Het Dashboard-tab trekt data uit alle andere tabs met SUMIFS, GEMIDDELDE en SPARKLINE formules.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- 6 PIJLERS SYSTEEM: PERSOONLIJKE EFFECTIVITEIT    -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="db-section">
+        <div class="db-section-header" style="background:linear-gradient(135deg,#0F766E,#134E4A);">
+            <h2>&#127919; 6-Pijler Systeem: Persoonlijke Effectiviteit & Financiele Groei</h2>
+            <p>Geintegreerd framework gebaseerd op wetenschappelijk onderbouwde strategieen - toegepast in iCloud & Google Workspace</p>
+        </div>
+        <div class="db-body">
+            <!-- KPI overview -->
+            <div class="kpi-row" style="background:linear-gradient(135deg,#F0FDFA,#CCFBF1);">
+                <div class="kpi-card">
+                    <div class="kpi-label">Pijler 1</div>
+                    <div class="kpi-value" style="font-size:1.1em;color:#0F766E;">SMART Doelen</div>
+                    <div class="kpi-sub">Meetbaar, tijdgebonden</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pijler 2</div>
+                    <div class="kpi-value" style="font-size:1.1em;color:#0F766E;">Tijdmanagement</div>
+                    <div class="kpi-sub">Time-blocking, Pomodoro</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pijler 3</div>
+                    <div class="kpi-value" style="font-size:1.1em;color:#0F766E;">Inkomsten</div>
+                    <div class="kpi-sub">Diversificatie, passief</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pijler 4</div>
+                    <div class="kpi-value" style="font-size:1.1em;color:#0F766E;">Gezondheid</div>
+                    <div class="kpi-sub">Slaap, voeding, beweging</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pijler 5</div>
+                    <div class="kpi-value" style="font-size:1.1em;color:#0F766E;">Reflectie</div>
+                    <div class="kpi-sub">Wekelijkse evaluatie</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Pijler 6</div>
+                    <div class="kpi-value" style="font-size:1.1em;color:#0F766E;">Tools</div>
+                    <div class="kpi-sub">Automatisering</div>
+                </div>
+            </div>
+
+            <!-- SMART DOELEN DATABASE -->
+            <div style="padding:24px;">
+                <h3 style="margin-bottom:16px;">&#127919; Pijler 1: SMART Doelen - Database View</h3>
+                <p style="font-size:0.88em;color:#64748B;margin-bottom:16px;">Formuleer elk doel volgens SMART (Specifiek, Meetbaar, Acceptabel, Realistisch, Tijdgebonden). Bouw dit in Google Sheets of Numbers.</p>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>SMART Doel</th>
+                            <th>S - Specifiek</th>
+                            <th>M - Meetbaar</th>
+                            <th>R - Realistisch</th>
+                            <th>T - Deadline</th>
+                            <th>Mijlpaal Q3</th>
+                            <th>Mijlpaal Q4</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>&#128176; Noodfonds opbouwen</strong></td>
+                            <td>&#8364;10.200 sparen (6 mnd lasten)</td>
+                            <td>Saldo op spaarrekening</td>
+                            <td>&#8364;560/mnd bij huidig inkomen</td>
+                            <td>31 dec 2026</td>
+                            <td>&#8364;5.640 (55%)</td>
+                            <td>&#8364;10.200 (100%)</td>
+                            <td><span class="status status-progress">33%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128170; Vetpercentage verlagen</strong></td>
+                            <td>Van 16% naar &lt;12% lichaamsvet</td>
+                            <td>Wekelijkse meting caliper/foto</td>
+                            <td>0,5%/mnd bij huidig schema</td>
+                            <td>31 dec 2026</td>
+                            <td>14% (-2%)</td>
+                            <td>&lt;12% (doel)</td>
+                            <td><span class="status status-progress">40%</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128170; Krachttoename compounds</strong></td>
+                            <td>Bench +15kg, Squat +20kg</td>
+                            <td>1RM of werkgewicht log</td>
+                            <td>+2,5kg per 2 weken</td>
+                            <td>31 dec 2026</td>
+                            <td>Bench 77,5kg / Squat 100kg</td>
+                            <td>Bench 85kg / Squat 110kg</td>
+                            <td><span class="status status-progress">Bezig</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128221; 90-dagen dagboek streak</strong></td>
+                            <td>Elke avond 5-10 min reflectie</td>
+                            <td>Streak-teller in gewoontetracker</td>
+                            <td>10 min/dag is haalbaar</td>
+                            <td>30 sep 2026</td>
+                            <td>90 dagen streak</td>
+                            <td>Onderhoud</td>
+                            <td><span class="status status-progress">18/90</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128176; ETF belegging starten</strong></td>
+                            <td>MSCI World ETF maandelijks</td>
+                            <td>Portefeuillewaarde in Sheets</td>
+                            <td>Na noodfonds vol, min &#8364;100/mnd</td>
+                            <td>31 jan 2027</td>
+                            <td>Buffer afronden</td>
+                            <td>Eerste inleg &#8364;500</td>
+                            <td><span class="status status-not-started">Wachtend</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128197; Slaapritme stabiliseren</strong></td>
+                            <td>22:30 bedtijd, 06:30 op, 7-9u slaap</td>
+                            <td>% nachten op-tijd in tracker</td>
+                            <td>Slaapfocus + alarm</td>
+                            <td>Doorlopend</td>
+                            <td>&#8805;85% compliance</td>
+                            <td>&#8805;90% compliance</td>
+                            <td><span class="status status-progress">71%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TIME-BLOCKING -->
+            <div style="padding:24px;">
+                <h3 style="margin-bottom:16px;">&#9200; Pijler 2: Time-Blocking Dagindeling</h3>
+                <p style="font-size:0.88em;color:#64748B;margin-bottom:16px;">Plan dit als terugkerende blokken in Apple Agenda of Google Calendar. Gebruik Focustijd/Niet Storen om afleidingen te blokkeren.</p>
+            </div>
+
+            <div class="platform-split" style="padding:0 24px 24px;">
+                <div>
+                    <h4 style="margin-bottom:10px;">&#128197; Werkdag Time-Blocks</h4>
+                    <div class="cal-mock">
+                        <div class="cal-header">Maandag t/m Vrijdag - Time Blocking</div>
+                        <div class="cal-body">
+                            <div class="cal-event morning">&#9728; 06:30-07:15 Ochtendritueel + ontbijt <span>45 min</span></div>
+                            <div class="cal-event travel">&#128663; 07:45-08:10 Reistijd kantoor <span>25 min</span></div>
+                            <div class="cal-event work">&#127919; 09:00-11:00 FOCUSBLOK: Prioriteit #1 <span>2 uur</span></div>
+                            <div class="cal-event" style="background:#FFF3E0;color:#E65100;border-left:3px solid #E65100;">&#9749; 11:00-11:15 Pauze + wandelen <span>15 min</span></div>
+                            <div class="cal-event work">&#128188; 11:15-12:30 Werkblok 2: Taken <span>1,25 uur</span></div>
+                            <div class="cal-event health">&#127860; 12:30-13:15 Lunch + korte wandeling <span>45 min</span></div>
+                            <div class="cal-event work">&#128188; 13:15-15:00 Werkblok 3: Projecten <span>1,75 uur</span></div>
+                            <div class="cal-event" style="background:#FFF3E0;color:#E65100;border-left:3px solid #E65100;">&#9749; 15:00-15:15 Pauze + ademhaling <span>15 min</span></div>
+                            <div class="cal-event work">&#128188; 15:15-17:00 Werkblok 4: Afronding <span>1,75 uur</span></div>
+                            <div class="cal-event" style="background:#E8EAF6;color:#283593;border-left:3px solid #283593;">&#128218; 17:00-17:30 Leren/ontwikkeling <span>30 min</span></div>
+                            <div class="cal-event health">&#128170; 18:00-19:00 Training <span>1 uur</span></div>
+                            <div class="cal-event evening">&#127860; 19:30-20:00 Avondeten <span>30 min</span></div>
+                            <div class="cal-event evening">&#128221; 21:30-21:45 Dagreflectie + planning morgen <span>15 min</span></div>
+                            <div class="cal-event evening">&#128564; 22:30 Bedtijd <span>vast</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:10px;">&#127922; Pomodoro Techniek</h4>
+                    <div class="app-mock">
+                        <div class="app-mock-title">Binnen elk focusblok</div>
+                        <div class="mock-item" style="background:#E8F5E9;">
+                            <span>&#127813; <strong>Pomodoro 1</strong>: 25 min focus</span>
+                            <span class="mock-tag tag-normal">Werk</span>
+                        </div>
+                        <div class="mock-item" style="background:#FFF8E1;">
+                            <span>&#9749; <strong>Pauze</strong>: 5 min</span>
+                        </div>
+                        <div class="mock-item" style="background:#E8F5E9;">
+                            <span>&#127813; <strong>Pomodoro 2</strong>: 25 min focus</span>
+                            <span class="mock-tag tag-normal">Werk</span>
+                        </div>
+                        <div class="mock-item" style="background:#FFF8E1;">
+                            <span>&#9749; <strong>Pauze</strong>: 5 min</span>
+                        </div>
+                        <div class="mock-item" style="background:#E8F5E9;">
+                            <span>&#127813; <strong>Pomodoro 3</strong>: 25 min focus</span>
+                            <span class="mock-tag tag-normal">Werk</span>
+                        </div>
+                        <div class="mock-item" style="background:#FFF8E1;">
+                            <span>&#9749; <strong>Pauze</strong>: 5 min</span>
+                        </div>
+                        <div class="mock-item" style="background:#E8F5E9;">
+                            <span>&#127813; <strong>Pomodoro 4</strong>: 25 min focus</span>
+                            <span class="mock-tag tag-normal">Werk</span>
+                        </div>
+                        <div class="mock-item" style="background:#E3F2FD;">
+                            <span>&#127774; <strong>Lange pauze</strong>: 15-30 min</span>
+                        </div>
+                    </div>
+
+                    <h4 style="margin:16px 0 10px;">&#128683; Afleidingen Minimaliseren</h4>
+                    <div class="app-mock">
+                        <div class="app-mock-title">Instellingen voor focus</div>
+                        <div class="mock-item"><div class="mock-checkbox checked"></div><span>Slaapfocus/Niet Storen tijdens focusblokken</span></div>
+                        <div class="mock-item"><div class="mock-checkbox checked"></div><span>Notificaties uit op telefoon + computer</span></div>
+                        <div class="mock-item"><div class="mock-checkbox checked"></div><span>E-mail gesloten buiten check-momenten</span></div>
+                        <div class="mock-item"><div class="mock-checkbox"></div><span>Websiteblocker voor social media</span></div>
+                        <div class="mock-item"><div class="mock-checkbox"></div><span>Noise-cancelling koptelefoon</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INKOMSTEN DIVERSIFICATIE -->
+            <div style="padding:0 24px 24px;">
+                <h3 style="margin-bottom:16px;">&#128200; Pijler 3: Inkomsten Diversifiieren - Track in Sheets/Numbers</h3>
+                <p style="font-size:0.88em;color:#64748B;margin-bottom:16px;">Bouw een apart tabblad "Inkomstenbronnen" in je financiele spreadsheet om huidige en toekomstige inkomsten te monitoren.</p>
+            </div>
+            <div style="overflow-x:auto;padding:0 24px 24px;">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>Inkomstenbron</th>
+                            <th>Type</th>
+                            <th>Schaalbaar</th>
+                            <th>Passief</th>
+                            <th>Huidige status</th>
+                            <th>Maandelijks &#8364;</th>
+                            <th>Doel &#8364;/mnd</th>
+                            <th>Volgende stap</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>&#128188; Salaris (hoofdbaan)</strong></td>
+                            <td>Actief</td>
+                            <td>Beperkt</td>
+                            <td>Nee</td>
+                            <td><span class="status status-active">Actief</span></td>
+                            <td class="num">&#8364; 2.800</td>
+                            <td class="num">&#8364; 3.200</td>
+                            <td>Salarisonderhandeling / groei</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128200; ETF Beleggen (MSCI World)</strong></td>
+                            <td>Passief</td>
+                            <td>Ja</td>
+                            <td>Ja</td>
+                            <td><span class="status status-not-started">Wachtend</span></td>
+                            <td class="num">&#8364; 0</td>
+                            <td class="num">&#8364; 50+</td>
+                            <td>Start na noodfonds vol (dec 2026)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128218; Online cursus/kennis</strong></td>
+                            <td>Schaalbaar</td>
+                            <td>Ja</td>
+                            <td>Ja</td>
+                            <td><span class="status status-planned">Onderzoek</span></td>
+                            <td class="num">&#8364; 0</td>
+                            <td class="num">&#8364; 200+</td>
+                            <td>Niche bepalen, platform kiezen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128187; Freelance/side project</strong></td>
+                            <td>Actief</td>
+                            <td>Beperkt</td>
+                            <td>Nee</td>
+                            <td><span class="status status-planned">Idee fase</span></td>
+                            <td class="num">&#8364; 0</td>
+                            <td class="num">&#8364; 500+</td>
+                            <td>Expertise inventariseren</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TEAMJAYWHEY TRAININGSSCHEMA -->
+            <div style="padding:0 24px 24px;">
+                <h3 style="margin-bottom:16px;">&#127947; Pijler 4: TEAMJAYWHEY Trainingsschema - Opzet in Sheets/Numbers</h3>
+                <p style="font-size:0.88em;color:#64748B;margin-bottom:16px;">Je persoonlijke trainingsschema (Upper/Lower split). Log dit per sessie in je fitness tracker spreadsheet. 1,5 min rust tussen sets. Stop 1-2 reps voor falen.</p>
+            </div>
+
+            <div class="platform-split" style="padding:0 24px 24px;">
+                <div>
+                    <h4 style="margin-bottom:10px;color:var(--pillar-health);">&#128170; Dag 1: UPPER BODY</h4>
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Oefening</th>
+                                <th>Sets</th>
+                                <th>Reps</th>
+                                <th>Tempo</th>
+                                <th>Rust</th>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td><strong>Chest Press Flat DB</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>B</td>
+                                <td><strong>Incline Cable Fly (seated)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td><strong>Lat Pulldown (unilateral)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>D</td>
+                                <td><strong>Upperback Row (wijde grip)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>E</td>
+                                <td><strong>Cable Shoulder Press</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td><strong>Delt Side Raise Machine</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>G1</td>
+                                <td><strong>Cable Triceps Extension (uni)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>G2</td>
+                                <td><strong>Cable Bicep Curl (facing out)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="margin-bottom:10px;color:var(--pillar-health);">&#127947; Dag 2: LOWER BODY</h4>
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>#</th>
+                                <th>Oefening</th>
+                                <th>Sets</th>
+                                <th>Reps</th>
+                                <th>Tempo</th>
+                                <th>Rust</th>
+                            </tr>
+                            <tr>
+                                <td>A</td>
+                                <td><strong>Barbell Squat</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>B</td>
+                                <td><strong>DB Lunges</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td><strong>Leg Press (voeten midden)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>D</td>
+                                <td><strong>Seated Leg Curl</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td><strong>Leg Adduction</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                            <tr>
+                                <td>G</td>
+                                <td><strong>Calf Extension (gestrekte knieen)</strong></td>
+                                <td class="num">3</td>
+                                <td class="num">12, 10, 8</td>
+                                <td>3011</td>
+                                <td>90s</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="tip-box health" style="margin-top:16px;">
+                        <div class="tip-icon">&#128161;</div>
+                        <div class="tip-text">
+                            <strong>Schema regels</strong>
+                            Rotatie: 1-2-1-2-1-2 (upper/lower). Na 2 trainingsdagen minimaal 1 rustdag. Max 5 sessies/week. Tel door waar je gebleven bent over de weken heen.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WEKELIJKSE EVALUATIE -->
+            <div style="padding:0 24px 24px;">
+                <h3 style="margin-bottom:16px;">&#128203; Pijler 5: Wekelijkse Evaluatie Template</h3>
+                <p style="font-size:0.88em;color:#64748B;margin-bottom:16px;">Maak dit als Google Form (automatisch naar Sheets) of als terugkerend template in Apple Notities / Google Docs. Plan elke zondag 20:00 in je agenda.</p>
+            </div>
+
+            <div class="platform-split" style="padding:0 24px 24px;">
+                <div>
+                    <div class="app-mock" style="background:#fff;border:2px solid #0F766E;">
+                        <div style="font-weight:700;font-size:1em;margin-bottom:12px;color:#0F766E;">&#128203; Wekelijkse Evaluatie - Week 26, 2026</div>
+                        <div style="font-size:0.88em;line-height:2;">
+                            <strong>1. Voltooide taken & doelen:</strong><br>
+                            &#9744; Top 3 dagelijks ingevuld? ___/7 dagen<br>
+                            &#9744; Training afgemaakt? ___/4 sessies<br>
+                            &#9744; Eiwit doel gehaald? ___/7 dagen<br>
+                            &#9744; Budget bijgehouden? Ja / Nee<br><br>
+                            <strong>2. Uitdagingen deze week:</strong><br>
+                            ___________________________<br><br>
+                            <strong>3. Successen om te vieren:</strong><br>
+                            ___________________________<br><br>
+                            <strong>4. KPI's check:</strong><br>
+                            &#8226; Uren focuswerk: ___<br>
+                            &#8226; Spaarpercentage: ___% <br>
+                            &#8226; Slaap gem.: ___ uur<br>
+                            &#8226; Dagboek streak: ___ dagen<br><br>
+                            <strong>5. Acties komende week:</strong><br>
+                            1. ___________________________<br>
+                            2. ___________________________<br>
+                            3. ___________________________<br>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:10px;">&#128202; Persoonlijke KPI Dashboard</h4>
+                    <div class="sheet-mock">
+                        <table>
+                            <tr>
+                                <th>KPI</th>
+                                <th>Doel</th>
+                                <th>Week 26</th>
+                                <th>Trend</th>
+                            </tr>
+                            <tr>
+                                <td>Focusuren/week</td>
+                                <td class="num">&#8805; 25 uur</td>
+                                <td class="num">22 uur</td>
+                                <td style="color:orange;">&#8594; +2</td>
+                            </tr>
+                            <tr>
+                                <td>Spaarpercentage</td>
+                                <td class="num">&#8805; 20%</td>
+                                <td class="num">20%</td>
+                                <td style="color:green;">&#9650; Op doel</td>
+                            </tr>
+                            <tr>
+                                <td>Training sessies</td>
+                                <td class="num">4x/week</td>
+                                <td class="num">3x</td>
+                                <td style="color:orange;">&#8594; +1</td>
+                            </tr>
+                            <tr>
+                                <td>Eiwit gem./dag</td>
+                                <td class="num">&#8805; 120g</td>
+                                <td class="num">128g</td>
+                                <td style="color:green;">&#9650; Op doel</td>
+                            </tr>
+                            <tr>
+                                <td>Slaap gem./nacht</td>
+                                <td class="num">&#8805; 7,5u</td>
+                                <td class="num">7,2u</td>
+                                <td style="color:orange;">&#8594; +0,3</td>
+                            </tr>
+                            <tr>
+                                <td>Dagboek streak</td>
+                                <td class="num">30 dagen</td>
+                                <td class="num">18 dagen</td>
+                                <td style="color:green;">&#9650; +7</td>
+                            </tr>
+                            <tr>
+                                <td>Reflecties/week</td>
+                                <td class="num">1x</td>
+                                <td class="num">1x</td>
+                                <td style="color:green;">&#9650; Op doel</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="tip-box mindful" style="margin-top:16px;">
+                        <div class="tip-icon">&#128161;</div>
+                        <div class="tip-text">
+                            <strong>Google Forms + Sheets automatisering</strong>
+                            Maak een Google Form van dit evaluatietemplate. Antwoorden vloeien automatisch in een Sheet. Gebruik grafieken om trends per week te visualiseren en deel het met je accountability-partner.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIJLER 6: TOOLS OVERZICHT -->
+            <div style="padding:0 24px 24px;">
+                <h3 style="margin-bottom:16px;">&#128295; Pijler 6: Aanbevolen Tools per Categorie</h3>
+            </div>
+            <div style="overflow-x:auto;padding:0 24px 24px;">
+                <table class="db-table">
+                    <thead>
+                        <tr>
+                            <th>Categorie</th>
+                            <th>Apple iCloud Tool</th>
+                            <th>Google Workspace Tool</th>
+                            <th>Alternatief (3e partij)</th>
+                            <th>Gebruik voor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>&#128197; Agenda & Planning</strong></td>
+                            <td>Apple Agenda</td>
+                            <td>Google Calendar</td>
+                            <td>Fantastical, Any.do</td>
+                            <td>Time-blocking, afspraken, routines</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#9745; Taken & Projecten</strong></td>
+                            <td>Herinneringen</td>
+                            <td>Google Tasks + Keep</td>
+                            <td>Todoist, Notion, ClickUp</td>
+                            <td>Eisenhower-matrix, Top 3, subtaken</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128202; Spreadsheets & Data</strong></td>
+                            <td>Numbers</td>
+                            <td>Google Sheets</td>
+                            <td>Excel, Airtable</td>
+                            <td>Fitness log, budget, KPI tracking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128176; Budget & Financien</strong></td>
+                            <td>Numbers</td>
+                            <td>Google Sheets</td>
+                            <td>Dyme, iBilly, MijnGeldzaken</td>
+                            <td>Uitgaven, noodfonds, beleggingen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128221; Dagboek & Reflectie</strong></td>
+                            <td>Journal / Notities</td>
+                            <td>Google Docs / Keep</td>
+                            <td>Notion, Day One</td>
+                            <td>Avondreflectie, dankbaarheid, logboek</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128170; Gezondheid</strong></td>
+                            <td>Gezondheid app</td>
+                            <td>Google Fit</td>
+                            <td>MyFitnessPal, Strong</td>
+                            <td>Slaap, gewicht, stappen, trainingen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#128203; Evaluatie & Feedback</strong></td>
+                            <td>Notities template</td>
+                            <td>Google Forms &#8594; Sheets</td>
+                            <td>Notion, Growth Journal</td>
+                            <td>Wekelijkse evaluatie, KPI dashboard</td>
+                        </tr>
+                        <tr>
+                            <td><strong>&#9881; Automatisering</strong></td>
+                            <td>Shortcuts (iOS)</td>
+                            <td>Apps Script</td>
+                            <td>IFTTT, Zapier</td>
+                            <td>Auto-herinneringen, data koppelingen</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
