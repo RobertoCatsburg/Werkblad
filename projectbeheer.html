@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projectbeheer</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; padding: 20px; }
+.container { max-width: 1000px; margin: 0 auto; }
+h1 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; color: #38bdf8; }
+.subtitle { text-align: center; color: #94a3b8; margin-bottom: 30px; font-size: 0.9rem; }
+.card { background: #1e293b; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.card h2 { font-size: 1.1rem; margin-bottom: 16px; color: #f8fafc; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.stat-card { background: #1e293b; border-radius: 12px; padding: 16px; text-align: center; }
+.stat-card .num { font-size: 1.8rem; font-weight: 700; color: #38bdf8; }
+.stat-card .lbl { font-size: 0.75rem; color: #94a3b8; margin-top: 4px; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.week-selector { display: flex; gap: 6px; flex-wrap: wrap; }
+.week-btn { padding: 8px 14px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; color: #94a3b8; cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+.week-btn:hover { border-color: #38bdf8; color: #38bdf8; }
+.week-btn.active { background: #38bdf8; color: #0f172a; border-color: #38bdf8; font-weight: 600; }
+.btn-save { display: inline-block; padding: 10px 18px; background: #38bdf8; color: #0f172a; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.btn-save:hover { background: #7dd3fc; }
+.btn-ghost { background: #334155; color: #e2e8f0; }
+.btn-ghost:hover { background: #475569; }
+.btn-danger { background: #ef4444; color: white; }
+.btn-danger:hover { background: #f87171; }
+.btn-small { padding: 6px 12px; font-size: 0.78rem; border-radius: 8px; }
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.project-card { background: #0f172a; border-radius: 10px; padding: 16px; cursor: pointer; border: 1px solid #1e293b; transition: border-color 0.2s; }
+.project-card:hover { border-color: #38bdf8; }
+.project-card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.project-card h3 { font-size: 1rem; color: #f8fafc; }
+.badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+.badge.actief { background: rgba(56,189,248,0.15); color: #38bdf8; }
+.badge.gepauzeerd { background: rgba(234,179,8,0.15); color: #eab308; }
+.badge.afgerond { background: rgba(34,197,94,0.15); color: #22c55e; }
+.project-card .desc { color: #94a3b8; font-size: 0.8rem; margin-bottom: 12px; min-height: 18px; }
+.project-card .meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-bottom: 8px; }
+.project-card .meta .overdue { color: #ef4444; font-weight: 600; }
+.progress-bar { height: 8px; background: #1e293b; border-radius: 4px; overflow: hidden; }
+.progress-bar .fill { height: 100%; background: linear-gradient(90deg, #ef4444, #eab308, #22c55e); border-radius: 4px; transition: width 0.3s; }
+.empty-state { text-align: center; color: #64748b; font-size: 0.85rem; padding: 30px 10px; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 100; }
+.modal { background: #1e293b; border-radius: 12px; padding: 24px; width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; }
+.modal h2 { font-size: 1.2rem; margin-bottom: 16px; color: #f8fafc; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 0.78rem; color: #94a3b8; margin-bottom: 6px; }
+.field input, .field select, .field textarea { width: 100%; padding: 10px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; color: #e2e8f0; font-size: 0.9rem; font-family: inherit; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #38bdf8; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; }
+.modal-actions .right { display: flex; gap: 8px; }
+.task-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #0f172a; border-radius: 8px; margin-bottom: 6px; }
+.task-row input[type=checkbox] { width: 18px; height: 18px; accent-color: #22c55e; flex-shrink: 0; }
+.task-row .title { flex: 1; font-size: 0.85rem; }
+.task-row .title.done { text-decoration: line-through; color: #64748b; }
+.task-row .prio { font-size: 0.7rem; padding: 2px 7px; border-radius: 999px; }
+.prio-laag { background: rgba(148,163,184,0.15); color: #94a3b8; }
+.prio-normaal { background: rgba(56,189,248,0.15); color: #38bdf8; }
+.prio-hoog { background: rgba(239,68,68,0.15); color: #ef4444; }
+.task-row .del { color: #64748b; cursor: pointer; font-size: 1rem; flex-shrink: 0; }
+.task-row .del:hover { color: #ef4444; }
+.add-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.add-row input, .add-row select { padding: 9px; border: 1px solid #334155; border-radius: 8px; background: #0f172a; color: #e2e8f0; font-size: 0.85rem; }
+.add-row input[type=text] { flex: 1; min-width: 140px; }
+.section-title { font-size: 0.85rem; color: #94a3b8; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+.log-entry { padding: 10px 12px; background: #0f172a; border-radius: 8px; margin-bottom: 8px; }
+.log-entry .head { display: flex; justify-content: space-between; font-size: 0.72rem; color: #64748b; margin-bottom: 4px; }
+.log-entry .head .proj-tag { color: #38bdf8; font-weight: 600; }
+.log-entry .text { font-size: 0.85rem; color: #e2e8f0; white-space: pre-wrap; }
+.log-entry .del { float: right; color: #64748b; cursor: pointer; font-size: 0.9rem; }
+.log-entry .del:hover { color: #ef4444; }
+.io-bar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 16px; }
+@media (max-width: 700px) { .stats-grid { grid-template-columns: 1fr 1fr; } .field-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Projectbeheer</h1>
+<p class="subtitle">Projecten, voortgangsmonitoring en logboek</p>
+
+<div class="io-bar">
+  <button class="btn-save btn-ghost btn-small" onclick="exportData()">Exporteren</button>
+  <label class="btn-save btn-ghost btn-small" style="cursor:pointer;">
+    Importeren
+    <input type="file" accept="application/json" onchange="importData(event)" style="display:none;">
+  </label>
+</div>
+
+<div class="stats-grid" id="stats"></div>
+
+<div class="card">
+  <div class="toolbar">
+    <div class="week-selector" id="status-filter"></div>
+    <button class="btn-save" onclick="openProjectModal()">+ Nieuw project</button>
+  </div>
+  <div class="project-grid" id="project-grid"></div>
+</div>
+
+<div class="card">
+  <h2>Voortgangsgrafiek</h2>
+  <canvas id="chart" height="200"></canvas>
+</div>
+
+<div class="card">
+  <h2>Logboek</h2>
+  <div class="add-row">
+    <select id="log-project"></select>
+    <input type="text" id="log-text" placeholder="Wat heb je gedaan / wat is de status?">
+    <button class="btn-save btn-small" onclick="addLog()">Toevoegen</button>
+  </div>
+  <div class="section-title">Recente entries</div>
+  <div id="log-list"></div>
+</div>
+
+</div>
+
+<div class="modal-overlay" id="project-modal" style="display:none;">
+  <div class="modal">
+    <h2 id="modal-title">Nieuw project</h2>
+    <div class="field">
+      <label>Naam</label>
+      <input type="text" id="f-name" placeholder="Projectnaam">
+    </div>
+    <div class="field">
+      <label>Beschrijving</label>
+      <textarea id="f-desc" rows="2" placeholder="Korte omschrijving"></textarea>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Status</label>
+        <select id="f-status">
+          <option value="actief">Actief</option>
+          <option value="gepauzeerd">Gepauzeerd</option>
+          <option value="afgerond">Afgerond</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Deadline</label>
+        <input type="date" id="f-deadline">
+      </div>
+    </div>
+
+    <div id="detail-section" style="display:none;">
+      <div class="section-title">Voortgang</div>
+      <div class="progress-bar" style="margin-bottom:6px;"><div class="fill" id="modal-progress-fill"></div></div>
+      <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:4px;" id="modal-progress-label"></div>
+
+      <div class="section-title">Taken</div>
+      <div id="task-list"></div>
+      <div class="add-row">
+        <input type="text" id="t-title" placeholder="Nieuwe taak">
+        <select id="t-prio">
+          <option value="normaal">Normaal</option>
+          <option value="laag">Laag</option>
+          <option value="hoog">Hoog</option>
+        </select>
+        <button class="btn-save btn-small" onclick="addTask()">+ Taak</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <div>
+        <button class="btn-save btn-danger btn-small" id="btn-delete-project" style="display:none;" onclick="deleteProject()">Verwijderen</button>
+      </div>
+      <div class="right">
+        <button class="btn-save btn-ghost btn-small" onclick="closeProjectModal()">Annuleren</button>
+        <button class="btn-save btn-small" onclick="saveProject()">Opslaan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'projectbeheer_data';
+const STATUSES = ['alle', 'actief', 'gepauzeerd', 'afgerond'];
+const STATUS_LABELS = { alle: 'Alle', actief: 'Actief', gepauzeerd: 'Gepauzeerd', afgerond: 'Afgerond' };
+
+let data = loadData();
+let statusFilter = 'alle';
+let editingProjectId = null;
+
+function loadData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) return JSON.parse(raw);
+  return { projects: [], tasks: [], logs: [], history: [] };
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+function today() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function projectTasks(projectId) {
+  return data.tasks.filter(t => t.projectId === projectId);
+}
+
+function projectProgress(projectId) {
+  const tasks = projectTasks(projectId);
+  if (!tasks.length) return 0;
+  const done = tasks.filter(t => t.done).length;
+  return Math.round((done / tasks.length) * 100);
+}
+
+function init() {
+  renderStatusFilter();
+  renderAll();
+}
+
+function renderAll() {
+  recordSnapshot();
+  renderStats();
+  renderProjects();
+  renderLogProjectSelect();
+  renderLogs();
+  drawChart();
+}
+
+function renderStatusFilter() {
+  const el = document.getElementById('status-filter');
+  el.innerHTML = '';
+  STATUSES.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'week-btn' + (s === statusFilter ? ' active' : '');
+    btn.textContent = STATUS_LABELS[s];
+    btn.onclick = () => { statusFilter = s; renderStatusFilter(); renderProjects(); };
+    el.appendChild(btn);
+  });
+}
+
+function renderStats() {
+  const totalProjects = data.projects.length;
+  const activeProjects = data.projects.filter(p => p.status === 'actief').length;
+  const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const tasksDoneWeek = data.tasks.filter(t => t.done && t.completedAt && t.completedAt > weekAgo).length;
+  const withTasks = data.projects.filter(p => projectTasks(p.id).length > 0);
+  const avgProgress = withTasks.length
+    ? Math.round(withTasks.reduce((sum, p) => sum + projectProgress(p.id), 0) / withTasks.length)
+    : 0;
+
+  const stats = [
+    { num: totalProjects, lbl: 'Projecten totaal' },
+    { num: activeProjects, lbl: 'Actieve projecten' },
+    { num: tasksDoneWeek, lbl: 'Taken afgerond (7d)' },
+    { num: avgProgress + '%', lbl: 'Gem. voortgang' }
+  ];
+  const el = document.getElementById('stats');
+  el.innerHTML = '';
+  stats.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'stat-card';
+    div.innerHTML = `<div class="num">${s.num}</div><div class="lbl">${s.lbl}</div>`;
+    el.appendChild(div);
+  });
+}
+
+function renderProjects() {
+  const el = document.getElementById('project-grid');
+  el.innerHTML = '';
+  const list = data.projects.filter(p => statusFilter === 'alle' || p.status === statusFilter);
+  if (!list.length) {
+    el.innerHTML = '<div class="empty-state">Nog geen projecten. Klik op "+ Nieuw project" om te beginnen.</div>';
+    return;
+  }
+  list.forEach(p => {
+    const progress = projectProgress(p.id);
+    const tasks = projectTasks(p.id);
+    let deadlineHtml = '';
+    if (p.deadline) {
+      const days = Math.ceil((new Date(p.deadline) - new Date(today())) / (1000 * 60 * 60 * 24));
+      const overdue = days < 0 && p.status !== 'afgerond';
+      deadlineHtml = `<span class="${overdue ? 'overdue' : ''}">${overdue ? Math.abs(days) + 'd te laat' : days + 'd resterend'}</span>`;
+    } else {
+      deadlineHtml = '<span>Geen deadline</span>';
+    }
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.onclick = () => openProjectModal(p.id);
+    card.innerHTML = `
+      <div class="top">
+        <h3>${escapeHtml(p.name)}</h3>
+        <span class="badge ${p.status}">${STATUS_LABELS[p.status]}</span>
+      </div>
+      <div class="desc">${escapeHtml(p.description || '')}</div>
+      <div class="meta"><span>${tasks.filter(t=>t.done).length}/${tasks.length} taken</span>${deadlineHtml}</div>
+      <div class="progress-bar"><div class="fill" style="width:${progress}%"></div></div>
+    `;
+    el.appendChild(card);
+  });
+}
+
+function escapeHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+function openProjectModal(id) {
+  editingProjectId = id || null;
+  const modal = document.getElementById('project-modal');
+  const detail = document.getElementById('detail-section');
+  const delBtn = document.getElementById('btn-delete-project');
+  if (id) {
+    const p = data.projects.find(x => x.id === id);
+    document.getElementById('modal-title').textContent = 'Project bewerken';
+    document.getElementById('f-name').value = p.name;
+    document.getElementById('f-desc').value = p.description || '';
+    document.getElementById('f-status').value = p.status;
+    document.getElementById('f-deadline').value = p.deadline || '';
+    detail.style.display = 'block';
+    delBtn.style.display = 'inline-block';
+    renderTaskList();
+    renderModalProgress();
+  } else {
+    document.getElementById('modal-title').textContent = 'Nieuw project';
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-desc').value = '';
+    document.getElementById('f-status').value = 'actief';
+    document.getElementById('f-deadline').value = '';
+    detail.style.display = 'none';
+    delBtn.style.display = 'none';
+  }
+  modal.style.display = 'flex';
+}
+
+function closeProjectModal() {
+  document.getElementById('project-modal').style.display = 'none';
+  editingProjectId = null;
+}
+
+function saveProject() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { alert('Geef het project een naam.'); return; }
+  const fields = {
+    name,
+    description: document.getElementById('f-desc').value.trim(),
+    status: document.getElementById('f-status').value,
+    deadline: document.getElementById('f-deadline').value
+  };
+  if (editingProjectId) {
+    const p = data.projects.find(x => x.id === editingProjectId);
+    Object.assign(p, fields);
+  } else {
+    const p = { id: uid(), createdAt: Date.now(), ...fields };
+    data.projects.push(p);
+    editingProjectId = p.id;
+  }
+  saveData();
+  renderAll();
+  if (editingProjectId) {
+    document.getElementById('detail-section').style.display = 'block';
+    document.getElementById('btn-delete-project').style.display = 'inline-block';
+    document.getElementById('modal-title').textContent = 'Project bewerken';
+    renderTaskList();
+    renderModalProgress();
+  } else {
+    closeProjectModal();
+  }
+}
+
+function deleteProject() {
+  if (!editingProjectId) return;
+  if (!confirm('Project en alle bijbehorende taken en logboekentries verwijderen?')) return;
+  data.projects = data.projects.filter(p => p.id !== editingProjectId);
+  data.tasks = data.tasks.filter(t => t.projectId !== editingProjectId);
+  data.logs = data.logs.filter(l => l.projectId !== editingProjectId);
+  saveData();
+  closeProjectModal();
+  renderAll();
+}
+
+function renderModalProgress() {
+  const progress = projectProgress(editingProjectId);
+  const tasks = projectTasks(editingProjectId);
+  document.getElementById('modal-progress-fill').style.width = progress + '%';
+  document.getElementById('modal-progress-label').textContent =
+    `${tasks.filter(t => t.done).length}/${tasks.length} taken afgerond (${progress}%)`;
+}
+
+function renderTaskList() {
+  const el = document.getElementById('task-list');
+  el.innerHTML = '';
+  const tasks = projectTasks(editingProjectId).sort((a, b) => a.createdAt - b.createdAt);
+  if (!tasks.length) {
+    el.innerHTML = '<div class="empty-state">Nog geen taken.</div>';
+    return;
+  }
+  tasks.forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'task-row';
+    row.innerHTML = `
+      <input type="checkbox" ${t.done ? 'checked' : ''}>
+      <span class="title ${t.done ? 'done' : ''}">${escapeHtml(t.title)}</span>
+      <span class="prio prio-${t.priority}">${t.priority}</span>
+      <span class="del">&times;</span>
+    `;
+    row.querySelector('input').onchange = (e) => toggleTask(t.id, e.target.checked);
+    row.querySelector('.del').onclick = () => deleteTask(t.id);
+    el.appendChild(row);
+  });
+}
+
+function addTask() {
+  const input = document.getElementById('t-title');
+  const title = input.value.trim();
+  if (!title || !editingProjectId) return;
+  data.tasks.push({
+    id: uid(),
+    projectId: editingProjectId,
+    title,
+    priority: document.getElementById('t-prio').value,
+    done: false,
+    createdAt: Date.now(),
+    completedAt: null
+  });
+  input.value = '';
+  saveData();
+  renderTaskList();
+  renderModalProgress();
+  renderStats();
+  renderProjects();
+  drawChart();
+}
+
+function toggleTask(id, checked) {
+  const t = data.tasks.find(x => x.id === id);
+  t.done = checked;
+  t.completedAt = checked ? Date.now() : null;
+  saveData();
+  renderTaskList();
+  renderModalProgress();
+  renderStats();
+  renderProjects();
+  drawChart();
+}
+
+function deleteTask(id) {
+  data.tasks = data.tasks.filter(t => t.id !== id);
+  saveData();
+  renderTaskList();
+  renderModalProgress();
+  renderStats();
+  renderProjects();
+  drawChart();
+}
+
+function renderLogProjectSelect() {
+  const el = document.getElementById('log-project');
+  const current = el.value;
+  el.innerHTML = '<option value="">Algemeen (geen project)</option>' +
+    data.projects.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
+  if (current) el.value = current;
+}
+
+function addLog() {
+  const projectId = document.getElementById('log-project').value || null;
+  const text = document.getElementById('log-text').value.trim();
+  if (!text) return;
+  data.logs.push({ id: uid(), projectId, text, createdAt: Date.now() });
+  document.getElementById('log-text').value = '';
+  saveData();
+  renderLogs();
+}
+
+function deleteLog(id) {
+  data.logs = data.logs.filter(l => l.id !== id);
+  saveData();
+  renderLogs();
+}
+
+function renderLogs() {
+  const el = document.getElementById('log-list');
+  el.innerHTML = '';
+  const logs = [...data.logs].sort((a, b) => b.createdAt - a.createdAt).slice(0, 50);
+  if (!logs.length) {
+    el.innerHTML = '<div class="empty-state">Nog geen logboekentries.</div>';
+    return;
+  }
+  logs.forEach(l => {
+    const proj = data.projects.find(p => p.id === l.projectId);
+    const dt = new Date(l.createdAt);
+    const dateStr = dt.toLocaleDateString('nl-NL') + ' ' + dt.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+    const div = document.createElement('div');
+    div.className = 'log-entry';
+    div.innerHTML = `
+      <div class="head">
+        <span>${proj ? `<span class="proj-tag">${escapeHtml(proj.name)}</span> &middot; ` : ''}${dateStr}</span>
+        <span class="del">&times;</span>
+      </div>
+      <div class="text">${escapeHtml(l.text)}</div>
+    `;
+    div.querySelector('.del').onclick = () => deleteLog(l.id);
+    el.appendChild(div);
+  });
+}
+
+function recordSnapshot() {
+  const total = data.tasks.length;
+  const completed = data.tasks.filter(t => t.done).length;
+  const d = today();
+  const existing = data.history.find(h => h.date === d);
+  if (existing) {
+    existing.total = total;
+    existing.completed = completed;
+  } else {
+    data.history.push({ date: d, total, completed });
+  }
+  data.history.sort((a, b) => a.date.localeCompare(b.date));
+  if (data.history.length > 60) data.history = data.history.slice(-60);
+  saveData();
+}
+
+function drawChart() {
+  const canvas = document.getElementById('chart');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.parentElement.clientWidth - 40;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const points = data.history.filter(h => h.total > 0);
+  if (points.length < 2) {
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Grafiek verschijnt zodra je op 2+ dagen voortgang registreert', canvas.width / 2, canvas.height / 2);
+    return;
+  }
+
+  const pad = { top: 20, right: 20, bottom: 30, left: 40 };
+  const w = canvas.width - pad.left - pad.right;
+  const h = canvas.height - pad.top - pad.bottom;
+
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (h / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + w, y);
+    ctx.stroke();
+  }
+
+  ctx.beginPath();
+  ctx.strokeStyle = '#38bdf8';
+  ctx.lineWidth = 2;
+  points.forEach((p, i) => {
+    const pct = (p.completed / p.total) * 100;
+    const x = pad.left + (i / (points.length - 1)) * w;
+    const y = pad.top + h - (pct / 100) * h;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  points.forEach((p, i) => {
+    const pct = (p.completed / p.total) * 100;
+    const x = pad.left + (i / (points.length - 1)) * w;
+    const y = pad.top + h - (pct / 100) * h;
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath();
+    ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('0%', 4, pad.top + h + 4);
+  ctx.fillText('100%', 4, pad.top + 4);
+
+  ctx.textAlign = 'center';
+  const step = Math.max(1, Math.ceil(points.length / 6));
+  points.forEach((p, i) => {
+    if (i % step !== 0 && i !== points.length - 1) return;
+    const x = pad.left + (i / (points.length - 1)) * w;
+    const label = p.date.slice(5);
+    ctx.fillText(label, x, canvas.height - 8);
+  });
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `projectbeheer-export-${today()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!imported.projects || !imported.tasks || !imported.logs) throw new Error('Ongeldig bestand');
+      if (!confirm('Huidige data overschrijven met geïmporteerde data?')) return;
+      data = { projects: imported.projects || [], tasks: imported.tasks || [], logs: imported.logs || [], history: imported.history || [] };
+      saveData();
+      renderAll();
+      alert('Import voltooid.');
+    } catch (err) {
+      alert('Kon bestand niet importeren: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+document.getElementById('project-modal').addEventListener('click', (e) => {
+  if (e.target.id === 'project-modal') closeProjectModal();
+});
+
+window.addEventListener('resize', drawChart);
+
+init();
+</script>
+</body>
+</html>

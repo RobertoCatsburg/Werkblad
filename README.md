@@ -4,6 +4,13 @@ Levensbedieningswerkblad — een gestructureerd werkblad om dagelijks of wekelij
 
 Zie [levensbedieningswerkblad.md](levensbedieningswerkblad.md) voor het volledige werkblad.
 
+## Tools
+
+| Document | Beschrijving |
+|----------|-------------|
+| [projectbeheer.html](projectbeheer.html) | Webapp voor projectbeheer: projecten en taken bijhouden, voortgang monitoren en een logboek bijhouden. Data wordt lokaal in je browser opgeslagen (localStorage), met export/import als back-up. |
+| [tracker.html](tracker.html) | Buikspierplan tracker (zie hieronder). |
+
 ## Actieve Doelen
 
 ### Zichtbare buikspieren in 10 weken (28 juni - 5 september 2026)
